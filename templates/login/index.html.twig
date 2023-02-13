@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+<h1>Connexion</h1>
+
+<form method="post" action="{{path('app_auth')}}">
+	<lablel for="email">Email</lablel>
+	<input type="email" id="email" name="email" value="{{last_email}}">
+	<lablel for="password">Mot de passe</lablel>
+	<input type="password" id="password" name="password">
+	<button type="submit">Connexion</button>
+</form>
+
+{% endblock %}

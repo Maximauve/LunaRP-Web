@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LunaRP{% endblock %}
+
+{% block body %}
+
+{% for flash in app.flashes('success') %}
+	{{ flash }}
+{% endfor %}
+
+<h1>LunaRP</h1>
+
+{% if app.session.get('user')%}
+
+{% set user = app.session.get('user') %}
+
+Connected as {{ user.username }}
+
+{% else %}
+
+You are not connected
+
+{% endif %}
+
+{% endblock %}
