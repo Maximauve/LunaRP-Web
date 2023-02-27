@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security;
+namespace App\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -107,5 +107,10 @@ class User implements UserInterface
 	{
 		// If you store any temporary, sensitive data on the user, clear it here
 		// $this->plainPassword = null;
+	}
+
+	public function apiRequest(): array
+	{
+		return [];
 	}
 }

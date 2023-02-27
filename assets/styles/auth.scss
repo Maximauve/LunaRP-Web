@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+	@apply text-3xl font-semibold ml-2 mb-10;
+}
+
+form {
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+	width: 15rem;
+	margin-left: 1.25rem;
+}
+
+.auth-input {
+	border: 1px solid rgb(156 163 175);
+
+	&:focus {
+		outline: none;
+		border: 1px solid rgb(75 85 99);
+	}
+}
+
+.submit-button {
+	margin-top: 0.5rem;
+	margin-left: 2rem;
+	color: rgb(255 255 255);
+	border-radius: 0.5rem;
+	background-color: rgb(59 130 246);
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	width: fit-content;
+
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(29 78 216);
+	}
+
+	&:active {
+		background-color: rgb(30 64 175);
+	}
+}

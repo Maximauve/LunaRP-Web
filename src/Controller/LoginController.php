@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Security\User;
+use App\Entity\User;
 use App\Service\UserApiService;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,24 +42,7 @@ class LoginController extends AbstractController
 		$email = $request->request->get('email');
 		$password = $request->request->get('password');
 
-		// Make API request to authenticate user
-		$client = HttpClient::create();
-		$response = $client->request('POST', $this->userApiService->getApiUrl() . '/users/auth/login', [
-			'headers' => [
-				'Content-Type' => 'application/json',
-			],
-			'json' => [
-				'email' => $email,
-				'password' => $password,
-			],
-		]);
-
-		$statusCode = $response->getStatusCode();
-		if ($statusCode !== 201) {
-			throw new \Exception('Error logging in');
-		}
-
-		$data = $response->toArray();
+		$data = $this->userApiService->login($email, $password);
 
 		// Store the JWT in local storage
 		$username = $data['username'];
