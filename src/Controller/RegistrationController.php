@@ -36,10 +36,20 @@ class RegistrationController extends AbstractController
 		try {
 			$data = $this->userApiService->register($username, $email, $password);
 		} catch (\Exception $e) {
-			$this->addFlash(
-				'error',
-				$e->getMessage()
-			);
+			$error = explode("ERR", $e->getMessage());
+			if (count($error) == 1) {
+				$this->addFlash(
+					'error',
+					$error[0]
+				);
+			} else {
+				foreach ($error as $err) {
+					$this->addFlash(
+						'error',
+						$err
+					);
+				}
+			}
 			return $this->render('registration/index.html.twig', [
 				'last_credentials' => ["email" => $email, "username" => $username]
 			]);

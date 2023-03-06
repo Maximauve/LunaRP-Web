@@ -7,32 +7,17 @@
 
 {% block body %}
 
-<h1>Inscription</h1>
+<h1>INSCRIPTION</h1>
 
-<p>Déjà inscrit ? <a class="underline" href="{{path('app_login')}}">Connectez-vous ici !</a></p>
-
-
-{# check for errors #}
-{% for message in app.flashes('error') %}
-	<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-		<span class="block sm:inline">{{ message }}</span>
-	</div>
-{% endfor %}
 
 <form method="post" action="{{path('app_sign_up')}}" id="registrationForm">
-	<lablel for="username">Nom d'utilisateur</lablel>
-	<input class="auth-input" type="text" id="username" name="username" value="{{last_credentials['username']}}">
-	<lablel for="email">Email</lablel>
-	<input class="auth-input" type="email" id="email" name="email" value="{{last_credentials['email']}}"> <span class="text-red-600" id="err_mail"></span>
-	<lablel for="password">Mot de passe</lablel>
-	<input class="auth-input" type="password" id="password" name="password">
-	<lablel for="password_confirm">Confirmer le mot de passe</lablel>
-	<input class="auth-input" type="password" id="password_confirm" name="password_confirm"> <span class="text-red-600" id="err_password"></span>
-	<button class="submit-button" type="submit" id="submit" disabled>Inscription</button>
+	<input type="text" id="username" name="username" value="{{last_credentials['username']}}" placeholder="Nom d'utilisateur" />
+	<input type="email" id="email" name="email" value="{{last_credentials['email']}}" placeholder="Adresse mail" />
+	<input type="password" id="password" name="password" placeholder="Mot de passe" />
+	<input type="password" id="password_confirm" name="password_confirm" placeholder="Confirmez votre mot de passe" />
+	<button class="submit-button" type="submit" id="submit">Inscription</button>
 </form>
 
-{% endblock %}
+<p class="text">Déjà inscrit ? <a class="underline" href="{{path('app_login')}}">Connectez-vous ici</a></p>
 
-{% block javascripts %}
-	<script src="{{ asset('js/registration.js') }}"></script>
 {% endblock %}

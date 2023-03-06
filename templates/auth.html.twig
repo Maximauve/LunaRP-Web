@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('auth') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-		  	{% block javascripts %}
-        {% endblock %}
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+      {{ encore_entry_link_tags('auth') }}
+    {% endblock %}
+  </head>
+  <body>
+		<div class="flex flex-row">
+			<img class="select-none w-[40vw] h-screen object-cover" src="https://i.pinimg.com/564x/9f/b9/3b/9fb93b8a265ca6fcbdf4699db2aaf9c4.jpg"/>
+			<div class="w-[5vw] bg-luna-dark h-screen shadow-[-0.5vw_0vw_1.5vw_0.5vw_rgba(2,16,70,0.75)]"></div>
+			<div class="w-[55vw] shadow-[-0.5vw_0vw_1.5vw_0.5vw_rgba(2,16,70,0.5)] h-screen bg-luna-darker flex justify-center items-center flex-col">
+				{% set flashes = app.flashes('error') %}
+				{% if flashes %}
+				<div class="error-popup" id="error-popup">
+					<button class="text error-close" id="error-close">✗</button>
+					<p class="error-title">Oups ! Cela ne s'est pas passé comme prévu.</p>
+					{% for flash in flashes %}
+						<p class="error-text">{{flash}}</p>
+					{% endfor %}
+				</div>
+				{% endif %}
+    		{% block body %}{% endblock %}
+			</div>
+		</div>
+	  {% block javascripts %}{% endblock %}
+		<script src="{{asset('js/errorPopup.js')}}"></script>
+  </body>
 </html>

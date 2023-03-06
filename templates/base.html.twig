@@ -24,8 +24,9 @@
 					{% if app.session.get('user') %}
 						{% set user = app.session.get('user') %}
 						<div class="connected">
-							<a id="user_pp" href="#"><img class="rounded-full w-[5vw]" src="{{ asset('images/maPP.gif') }}" /></a>
-							<div class="logout">
+							<a id="user_pp" href="#"><img class="profile-pic rounded-full w-[5vw]" src="{{ asset('images/maPP.gif') }}" /></a>
+							<div class="app">
+								<a href="#"><img class="rounded-full w-[5vw]" src="{{ asset('images/maPP.gif') }}" /></a>
 								<a href="{{ path('app_logout') }}"><img class="rounded-full w-[5vw]" src="{{ asset('images/logout.jpg') }}" /></a>
 							</div>
 						</div>
@@ -35,9 +36,25 @@
 				</div>
 
 			</nav>
-        {% block body %}{% endblock %}
-		  	{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+      {% block body %}{% endblock %}
+
+			<div class="dices">
+				<button class="throw" id="throw">LANCER</button>
+				<button class="main-button" id="dice-20">
+					<img src="https://rollthedice.online/assets/images/dice/1x1/d20_dice_1x1.png" />
+				</button>
+				<div class="select-dice">
+					<button id="dice-100"><img src="https://rollthedice.online/assets/images/dice/1x1/d100_dice_1x1.png"/></button>
+					<button id="dice-10"><img src="https://rollthedice.online/assets/images/dice/1x1/d12_dice_1x1.png"/></button>
+					<button id="dice-8"><img src="https://rollthedice.online/assets/images/dice/1x1/d10_dice_1x1.png"/></button>
+					<button id="dice-6"><img src="https://rollthedice.online/assets/images/dice/1x1/d8_dice_1x1.png"/></button>
+					<button id="dice-12"><img src="https://aux.iconspalace.com/uploads/dice-icon-256.png"/></button>
+					<button id="dice-4"><img src="https://rollthedice.online/assets/images/dice/1x1/d4_dice_1x1.png"/></button>
+				</div>
+			</div>
+
+		  {% block javascripts %}
+          {{ encore_entry_script_tags('app') }}
+      {% endblock %}
     </body>
 </html>

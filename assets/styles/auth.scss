@@ -2,45 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
+
+$luna-darker : #021046;
+$luna-dark : #03217D;
+$luna : #0838CF;
+$luna-light : #0C82F2;
+$luna-white : #FFF4DF;
+$luna-accent : #FAA816;
+$luna-error: #922727;
+
 h1 {
-	@apply text-3xl font-semibold ml-2 mb-10;
+	font-size: 1.875rem;
+	line-height: 2.25rem;
+	font-weight: 600;
+	margin-bottom: 5vh;
+	color: $luna-accent;
+}
+
+.text {
+	align-self: flex-end;
+	margin-right: 3vw;
+	color: $luna-accent;
 }
 
 form {
 	display: flex;
-	align-items: start;
+	align-items: center;
 	flex-direction: column;
-	width: 15rem;
-	margin-left: 1.25rem;
+	width: 100%;
+	margin-bottom: 3vh;
+	// margin-left: 1.25rem;
 }
 
-.auth-input {
-	border: 1px solid rgb(156 163 175);
+// label {
+// 	display: none;
+// }
+
+input {
+	border-radius: 100px;
+	background-color: $luna-dark;
+	color: $luna-white;
+	height: 4vh;
+	width: 40%;
+	padding-left: 2vw;
+	padding-right: 2vw;
+
+	margin-bottom: 2vh;
+
+	&::placeholder {
+		color: $luna-light;
+	}
 
 	&:focus {
 		outline: none;
-		border: 1px solid rgb(75 85 99);
+
+		// &~label {
+		// 	display: block;
+		// 	color: $luna-light;
+		// 	font-size: 0.75rem;
+		// 	margin-bottom: 0.25rem;
+		// }
 	}
 }
 
-.submit-button {
-	margin-top: 0.5rem;
-	margin-left: 2rem;
-	color: rgb(255 255 255);
-	border-radius: 0.5rem;
-	background-color: rgb(59 130 246);
-	padding-left: 1rem;
-	padding-right: 1rem;
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
-	width: fit-content;
+button[type=submit] {
+	border-radius: 100px;
+	background-color: $luna;
+	color: $luna-white;
+	width: 20vw;
+	padding-left: 2vw;
+	padding-right: 2vw;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
 
-	&:hover {
-		cursor: pointer;
-		background-color: rgb(29 78 216);
-	}
+.error-popup {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	width: 50%;
+	min-height: 10vh;
+	height: fit-content;
+	position: absolute;
+	margin-top: 3vh;
+	background-color: $luna-error;
+	top: 0px;
+	border: 2px solid $luna-accent;
+	border-radius: 25px;
+	padding-left: 1.5vw;
+	padding-top: 1.5vh;
+	padding-bottom: 1.5vh;
+}
 
-	&:active {
-		background-color: rgb(30 64 175);
-	}
+.error-title {
+	color: $luna-white;
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-left: 1vw;
+	margin-bottom: 1vh;
+}
+
+.error-text {
+	color: $luna-white;
+}
+
+.error-close {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin-right: 1.5vw;
+	margin-top: 1.5vh;
+}
+
+.border {
+	border: 1px solid red;
+}
+
+button {
+	user-select: none;
 }

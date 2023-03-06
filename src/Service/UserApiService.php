@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exception\ApiException;
 use Symfony\Component\HttpClient\HttpClient;
 
 class UserApiService
@@ -34,7 +35,12 @@ class UserApiService
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 201) {
-			throw new \Exception($response->toArray()['message']);
+			$json = $response->toArray(false);
+			if (gettype($json['message']) === 'array') {
+				throw new \Exception(implode("ERR", $json['message']));
+			} else {
+				throw new \Exception($json['message']);
+			}
 		}
 
 		return $response->toArray();
@@ -55,7 +61,8 @@ class UserApiService
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 201) {
-			throw new \Exception($response->toArray()['message']);
+			$json = $response->toArray(false);
+			throw new \Exception($json['message']);
 		}
 
 		return $response->toArray();
@@ -68,7 +75,8 @@ class UserApiService
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {
-			throw new \Exception($response->toArray()['message']);
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
 		}
 
 		return $response->toArray();

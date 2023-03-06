@@ -42,7 +42,12 @@ class LoginController extends AbstractController
 		$email = $request->request->get('email');
 		$password = $request->request->get('password');
 
-		$data = $this->userApiService->login($email, $password);
+		try {
+			$data = $this->userApiService->login($email, $password);
+		} catch (\Exception $e) {
+			$this->addFlash('error', $e->getMessage());
+			return $this->redirectToRoute('app_login');
+		}
 
 		// Store the JWT in local storage
 		$username = $data['username'];
