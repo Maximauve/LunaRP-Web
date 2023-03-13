@@ -38,23 +38,22 @@
 			</nav>
       {% block body %}{% endblock %}
 
-			<div class="dices">
+			<div class="dices" id="dices">
 				<button class="throw" id="throw">LANCER</button>
 				<button class="main-button" id="dice-20">
 					<img src="https://rollthedice.online/assets/images/dice/1x1/d20_dice_1x1.png" />
 				</button>
-				<div class="select-dice">
+				<div class="select-dice hidden" id="dice-drawer">
 					<button id="dice-100"><img src="https://rollthedice.online/assets/images/dice/1x1/d100_dice_1x1.png"/></button>
-					<button id="dice-10"><img src="https://rollthedice.online/assets/images/dice/1x1/d12_dice_1x1.png"/></button>
-					<button id="dice-8"><img src="https://rollthedice.online/assets/images/dice/1x1/d10_dice_1x1.png"/></button>
-					<button id="dice-6"><img src="https://rollthedice.online/assets/images/dice/1x1/d8_dice_1x1.png"/></button>
-					<button id="dice-12"><img src="https://aux.iconspalace.com/uploads/dice-icon-256.png"/></button>
+					<button id="dice-12"><img src="https://rollthedice.online/assets/images/dice/1x1/d12_dice_1x1.png"/></button>
+					<button id="dice-10"><img src="https://rollthedice.online/assets/images/dice/1x1/d10_dice_1x1.png"/></button>
+					<button id="dice-8"><img src="https://rollthedice.online/assets/images/dice/1x1/d8_dice_1x1.png"/></button>
+					<button id="dice-6"><img src="https://aux.iconspalace.com/uploads/dice-icon-256.png"/></button>
 					<button id="dice-4"><img src="https://rollthedice.online/assets/images/dice/1x1/d4_dice_1x1.png"/></button>
 				</div>
 			</div>
 
-		  {% block javascripts %}
-          {{ encore_entry_script_tags('app') }}
-      {% endblock %}
+		  {% block javascripts %}{% endblock %}
+			<script src="{{ asset('js/dices.js')}}"></script>
     </body>
 </html>

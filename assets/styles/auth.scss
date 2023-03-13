@@ -11,6 +11,38 @@ $luna-white : #FFF4DF;
 $luna-accent : #FAA816;
 $luna-error: #922727;
 
+.main-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.image {
+	user-select: none;
+	width: 40vw;
+	height: 100vh;
+	object-fit: cover;
+}
+
+.middle-div {
+	width: 5vw;
+	height: 100vh;
+	background-color: $luna-dark;
+	box-shadow: -0.5vw, 0vw, 1.5vw, 0.5vw, rgba(2, 16, 70, 0.75);
+}
+
+.container {
+	width: 55vw;
+	height: 100vh;
+	background-image: url(/public/images/bg-main.jpg);
+	background-size: cover;
+	box-shadow: -0.5vw, 0vw, 1.5vw, 0.5vw, rgba(2, 16, 70, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+
 h1 {
 	font-size: 1.875rem;
 	line-height: 2.25rem;

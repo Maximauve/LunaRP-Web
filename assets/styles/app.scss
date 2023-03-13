@@ -119,8 +119,8 @@ nav {
 
 .dices {
 	position: fixed;
-	bottom: 3vh;
-	right: 2em;
+	bottom: 2vh;
+	right: 2vw;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -128,36 +128,36 @@ nav {
 
 .throw {
 	position: absolute;
-	bottom: 3vh;
-	right: 3.8em;
+	bottom: 2vh;
+	right: 5vw;
 	padding: 0px;
-	font-size: x-large;
+	font-size: 2.65vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 5.5em;
-	height: 2em;
+	width: 8vw;
+	height: 5.5vh;
 	margin-bottom: 0.5em;
 	background-color: $luna-dark;
 	color: $luna-light;
 	border-radius: 100px 0px 0px 100px;
-	border: 2px solid $luna-accent;
-	box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+	border: 0.3vh solid $luna-accent;
+	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 }
 
 .main-button {
 	position: absolute;
 	bottom: inherit;
 	right: inherit;
-	width: 4.5em;
-	height: 4.5em;
+	width: 8.2vh;
+	height: 8.2vh;
 	display: flex;
 	border-radius: 100px;
 	align-items: center;
 	justify-content: center;
 	background-color: $luna;
-	border: 2px solid $luna-accent;
-	box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+	border: 0.3vh solid $luna-accent;
+	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 
 	img {
 		width: 75%;
@@ -167,15 +167,15 @@ nav {
 
 .select-dice {
 	position: absolute;
-	bottom: 6.5em;
+	bottom: 11vh;
 	right: inherit;
 	padding: 0px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 4.5em;
-	margin-bottom: 0.5em;
+	width: 3.7vw;
+	margin-bottom: 1vw;
 	color: $luna-light;
 
 	button {
@@ -188,7 +188,7 @@ nav {
 		width: 75%;
 		background-color: $luna-dark;
 		border-radius: 100px;
-		box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
 	}
 }
 
