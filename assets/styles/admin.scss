@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$luna-darker : #021046;
+$luna-dark : #03217D;
+$luna : #0838CF;
+$luna-light : #0C82F2;
+$luna-white : #FFF4DF;
+$luna-accent : #FAA816;
+$luna-error: #922727;
+
+body {
+	background-color: $luna-darker;
+	color: $luna-white;
+	font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10vh;
+
+    .back {
+        position:absolute;
+        top: 25px;
+        left: 25px;
+        color: $luna-white;
+        font-size: 1.5rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .left-side {
+        background-color: $luna-dark;
+        width: 20%;
+        height: 80vh;
+        margin-left: 5%;
+        margin-right: 5%;
+        border-radius: 1rem;
+
+        ul {
+            margin-top:100px;
+            margin-left:15%;
+
+            li {
+                list-style: none;
+                padding-left: 15%;
+                margin-bottom: 20px;
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: $luna-white;
+                cursor: pointer;
+            }
+
+            li.active {
+                color: $luna-accent;
+                border-radius: 1rem;
+            }
+        }
+    }
+
+    .right-side {
+        background-color: $luna-dark;
+        width: 80%;
+        height: 80vh;
+        margin-right: 5%;
+        border-radius: 1rem;
+    }
+}
