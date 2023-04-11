@@ -14,18 +14,28 @@
 			<div class="container">
 				{% set flashes = app.flashes('error') %}
 				{% if flashes %}
-				<div class="error-popup" id="error-popup">
-					<button class="text error-close" id="error-close">✗</button>
-					<p class="error-title">Oups ! Cela ne s'est pas passé comme prévu.</p>
-					{% for flash in flashes %}
-						<p class="error-text">{{flash}}</p>
-					{% endfor %}
-				</div>
+					<div class="error-popup" id="error-popup">
+						<button class="text error-close" id="error-close">✗</button>
+						<p class="error-title">Oups ! Cela ne s'est pas passé comme prévu.</p>
+						{% for flash in flashes %}
+							<p class="error-text">{{flash}}</p>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% set flashes = app.flashes('success') %}
+				{% if flashes %}
+					<div class="success-popup" id="success-popup">
+						<button class="text success-close" id="success-close">✗</button>
+						<p class="success-title">Super !</p>
+						{% for flash in flashes %}
+							<p class="success-text">{{flash}}</p>
+						{% endfor %}
+					</div>
 				{% endif %}
     		{% block body %}{% endblock %}
 			</div>
 		</div>
 	  {% block javascripts %}{% endblock %}
-		<script src="{{asset('js/errorPopup.js')}}"></script>
+		<script src="{{asset('js/popUp.js')}}"></script>
   </body>
 </html>

@@ -6,36 +6,53 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
+				<script src="https://kit.fontawesome.com/f6e9b7154e.js" crossorigin="anonymous"></script>
     </head>
     <body>
+		{% set flashes = app.flashes('error') %}
+		{% if flashes %}
+			<div class="error-popup" id="error-popup">
+				<button class="text error-close" id="error-close">✗</button>
+				<p class="error-title">Oups ! Cela ne s'est pas passé comme prévu.</p>
+				{% for flash in flashes %}
+					<p class="error-text">{{flash}}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
+		{% set flashes = app.flashes('success') %}
+		{% if flashes %}
+			<div class="success-popup" id="success-popup">
+				<button class="text success-close" id="success-close">✗</button>
+				<p class="success-title">Super !</p>
+				{% for flash in flashes %}
+					<p class="success-text">{{flash}}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
 			<nav>
-				
 				<div class="luna">
-					<a href="{{ path('app_home') }}">LunaRP</a>
+					<a href="{{ path('app_home') }}">Luna RP 🌙</a>
 				</div>
 				
 				<div class="links">
-					<a href="#">coucou</a>
-					<a href="#">hehe</a>
-					<a href="#">yaya</a>
+					<a href="#">Personnages</a>
+					<a href="#">Campagnes</a>
+					<a href="{{ path('app_wiki') }}">Wiki</a>
 				</div>
 				
 				<div class="user">
 					{% if app.session.get('user') %}
 						{% set user = app.session.get('user') %}
 						<div class="connected">
-							<a id="user_pp" href="#"><img class="profile-pic rounded-full w-[5vw]" src="{{ asset('images/maPP.gif') }}" /></a>
-							<div class="app">
-								<a href="#"><img class="rounded-full w-[5vw]" src="{{ asset('images/maPP.gif') }}" /></a>
-								<a href="{{ path('app_logout') }}"><img class="rounded-full w-[5vw]" src="{{ asset('images/logout.jpg') }}" /></a>
-							</div>
+							<a class="profile-pic" href="#"><img src="{{ asset('images/maPP.gif') }}" /></a>
+							<a class="logout-button" href="{{path('app_logout')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 						</div>
 					{% else %}
-						<a href="{{ path('app_login') }}"><img class="rounded-full w-[5vw]" src="{{ asset('images/default.jpg') }}" /></a>
+						<a class="profile-pic" href="{{ path('app_login') }}"><img src="{{ asset('images/default.jpg') }}" /></a>
 					{% endif %}
 				</div>
-
 			</nav>
+
       {% block body %}{% endblock %}
 
 			<div class="dices" id="dices">
@@ -55,5 +72,6 @@
 
 		  {% block javascripts %}{% endblock %}
 			<script src="{{ asset('js/dices.js')}}"></script>
+			<script src="{{asset('js/popUp.js')}}"></script>
     </body>
 </html>

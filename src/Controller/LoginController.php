@@ -36,7 +36,7 @@ class LoginController extends AbstractController
 		]);
 	}
 
-	#[Route('/login/auth', name: 'app_auth', methods: ['POST'])]
+	#[Route('/login', name: 'app_auth', methods: ['POST'])]
 	public function APILogin(Request $request)
 	{
 		$email = $request->request->get('email');
@@ -46,7 +46,9 @@ class LoginController extends AbstractController
 			$data = $this->userApiService->login($email, $password);
 		} catch (\Exception $e) {
 			$this->addFlash('error', $e->getMessage());
-			return $this->redirectToRoute('app_login');
+			return $this->render('login/index.html.twig', [
+				'last_email' => $email,
+			]);
 		}
 
 		// Store the JWT in local storage
@@ -65,8 +67,8 @@ class LoginController extends AbstractController
 	#[Route('/logout', name: 'app_logout', methods: ['GET'])]
 	public function logout(Request $request)
 	{
-		$this->addFlash('success', 'You have been logged out.');
+		$this->addFlash('success', 'Vous avez bien été déconnecté.');
 		$request->getSession()->remove('user');
-		return $this->redirectToRoute('app_home');
+		return $this->redirectToRoute('app_login');
 	}
 }
