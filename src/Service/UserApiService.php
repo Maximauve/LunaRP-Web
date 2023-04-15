@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Exception\ApiException;
 use Symfony\Component\HttpClient\HttpClient;
 
 class UserApiService
@@ -11,7 +10,7 @@ class UserApiService
 
 	public function __construct(string $apiUrl)
 	{
-		$this->apiUrl = $apiUrl;
+		$this->apiUrl = $apiUrl . "/users/";
 	}
 
 	public function getAPIUrl(): string
@@ -22,7 +21,7 @@ class UserApiService
 	public function register(string $username, string $email, string $password): array
 	{
 		$client = HttpClient::create();
-		$response = $client->request('POST', $this->apiUrl . '/users/auth/sign-up', [
+		$response = $client->request('POST', $this->apiUrl . 'auth/sign-up', [
 			'headers' => [
 				'Content-Type' => 'application/json',
 			],
@@ -49,7 +48,7 @@ class UserApiService
 	public function login(string $email, string $password): array
 	{
 		$client = HttpClient::create();
-		$response = $client->request('POST', $this->apiUrl . '/users/auth/login', [
+		$response = $client->request('POST', $this->apiUrl . 'auth/login', [
 			'headers' => [
 				'Content-Type' => 'application/json',
 			],
@@ -71,7 +70,7 @@ class UserApiService
 	public function getUser(int $id): array
 	{
 		$client = HttpClient::create();
-		$response = $client->request('GET', $this->apiUrl . '/users/' . $id);
+		$response = $client->request('GET', $this->apiUrl . $id);
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {
