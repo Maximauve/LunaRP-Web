@@ -27,6 +27,11 @@ class User implements UserInterface
 		$this->jwt = $jwt;
 	}
 
+	public function getJwt(): ?string
+	{
+		return $this->jwt;
+	}
+
 	public function getEmail(): ?string
 	{
 		return $this->email;

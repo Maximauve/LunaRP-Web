@@ -1,5 +1,28 @@
 {% extends 'admin.html.twig' %}
 
 {% block content %}
-
+    {% if all_characters is not null %}
+    <table class="table-auto">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>User</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for character in all_characters %}
+                <tr>
+                    <td>{{ character.name }}</td>
+                    <td>{{ character.user.username }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {% for flash in app.flashes('error')%}
+            <div class="alert alert-danger" role="alert">
+                {{ flash }}
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
