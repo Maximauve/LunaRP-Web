@@ -4,13 +4,13 @@ namespace App\Service;
 
 use Symfony\Component\HttpClient\HttpClient;
 
-class CharacterApiService
+class LanguageApiService
 {
 	private string $apiUrl;
 
 	public function __construct(string $apiUrl)
 	{
-		$this->apiUrl = $apiUrl . "/characters/";
+		$this->apiUrl = $apiUrl . "/languages/";
 	}
 
 	public function getAPIUrl(): string
@@ -18,7 +18,7 @@ class CharacterApiService
 		return $this->apiUrl;
 	}
 
-	public function createCharacter(string $token, array $character): array
+	public function createLanguage(string $token, array $language): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -26,7 +26,7 @@ class CharacterApiService
 				'Content-Type' => 'application/json',
 			],
 			'Authorization' => 'Bearer ' . $token,
-			'body' => $character,
+			'body' => $language,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -42,7 +42,7 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function getCharacter(string $token, int $id): array
+	public function getLanguage(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function getCharacters(string $token): array
+	public function getLanguages(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function UpdateCharacter(string $token, array $character)
+	public function UpdateLanguage(string $token, array $language)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -96,7 +96,7 @@ class CharacterApiService
 				'Content-Type' => 'application/json',
 			],
 			'Authorization' => 'Bearer ' . $token,
-			'body' => $character,
+			'body' => $language,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -112,7 +112,7 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function deleteCharacter(string $token, int $id): array
+	public function deleteLanguage(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [
