@@ -19,6 +19,10 @@ body {
 	width: 100vw;
 }
 
+.hidden {
+	display: none !important;
+}
+
 nav {
 	color: $luna-white;
 	display: flex;
@@ -92,7 +96,8 @@ nav {
 			padding-top: 1vh;
 
 			img {
-				width: 4vw;
+
+				width: 50px;
 				border-radius: 100px;
 			}
 		}
@@ -110,8 +115,8 @@ nav {
 
 .dices {
 	position: fixed;
-	bottom: 2vh;
-	right: 2vw;
+	bottom: 15px;
+	right: 30px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -119,20 +124,20 @@ nav {
 
 .throw {
 	position: absolute;
-	bottom: 2vh;
-	right: 5vw;
-	padding: 0px;
-	font-size: 2.65vh;
+	bottom: 17px;
+	right: 87px;
+	padding: 5px;
+	font-size: 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 8vw;
-	height: 5.5vh;
+	width: 150px;
+	height: 50px;
 	margin-bottom: 0.5em;
 	background-color: $luna-dark;
 	color: $luna-light;
 	border-radius: 100px 0px 0px 100px;
-	border: 0.3vh solid $luna-accent;
+	border: 2px solid $luna-accent;
 	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 }
 
@@ -140,50 +145,55 @@ nav {
 	position: absolute;
 	bottom: inherit;
 	right: inherit;
-	width: 8.2vh;
-	height: 8.2vh;
+	width: 70px;
+	height: 70px;
 	display: flex;
 	border-radius: 100px;
 	align-items: center;
 	justify-content: center;
 	background-color: $luna;
-	border: 0.3vh solid $luna-accent;
+	border: 2px solid $luna-accent;
 	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 
 	img {
 		width: 75%;
+		color: $luna-white;
 	}
 }
 
 .select-dice {
 	position: absolute;
-	bottom: 11vh;
+	bottom: 85px;
 	right: inherit;
 	padding: 0px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 3.7vw;
+	width: 50px;
 	margin-bottom: 1vw;
 	color: $luna-light;
 
 	button {
 		margin-top: 1vh;
+		img {
+			display: inline;
+			margin: 0px;
+			width: 50px;
+			height: 50px;
+			padding:5px;
+			background-color: $luna-dark;
+			color:$luna-white;
+			border-radius: 100px;
+			box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
+		}
 	}
 
-	img {
-		display: inline;
-		margin: 0px;
-		width: 75%;
-		background-color: $luna-dark;
-		border-radius: 100px;
-		box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
-	}
+	
 }
 
-.hidden {
-	display: none;
+.dice-hidden {
+	display: none !important;
 }
 
 
@@ -341,7 +351,7 @@ nav {
 			a {
 				width: 100%;
 				display: flex;
-				align-items:center;
+				align-items: center;
 				justify-content: center;
 			}
 
@@ -411,15 +421,17 @@ nav {
 }
 
 @keyframes slide {
-    0% {
-        transform: translatey(-40px);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-40px);
-    }
+	0% {
+		transform: translatey(-40px);
+	}
+
+	50% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-40px);
+	}
 }
 
 /*
@@ -485,6 +497,161 @@ nav {
 		.description {
 			color: $luna-white;
 			font-size: normal;
+		}
+	}
+}
+
+/*
+	o==============o
+	* PAGE PROFILE *
+	o==============o
+*/
+
+.user-container {
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	.container-left {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		width: 11vw;
+		border-radius: 25px;
+		height: fit-content;
+
+		.delete-img {
+			position: absolute;
+			align-self: flex-end;
+			margin-left: 9vw;
+			margin-top: 9.4vw;
+			background-color: $luna-dark;
+			color: $luna-accent;
+			border-radius: 15px 0 0 0;
+			border: 1px solid $luna-accent;
+			width: 2vw;
+			cursor: pointer;
+		}
+
+		.file-name {
+			position: absolute;
+			width: max-content;
+			max-width: 11vw;
+			margin-top: -1vh;
+			background-color: $luna-dark;
+			color: $luna-white;
+			border-radius: 100px;
+			border: 1px solid $luna-accent;
+			padding-left: 1vw;
+			padding-right: 1vw;
+		}
+
+		.img-holder {
+			width: 11vw;
+			height: 11vw;
+			position: absolute;
+			z-index: 1;
+			display: flex;
+			justify-content: center;
+		}
+
+		img {
+			width: 11vw;
+			height: 11vw;
+			object-fit: cover;
+			border-radius: 25px 25px 0 0;
+		}
+
+		label {
+			z-index: 2;
+			cursor: pointer;
+			font-size: 3rem;
+			border-radius: 25px 25px 0 0;
+			color: $luna-accent;
+			background-color: rgba($luna-white, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			width: 11vw;
+			height: 11vw;
+		}
+
+		button {
+			width: 100%;
+			height: 2rem;
+			border-radius: 0 0 25px 25px;
+			background-color: $luna-accent;
+			color: $luna;
+			font-weight: bold;
+			min-height: fit-content;
+
+			&.undo {
+				background-color: $luna-error;
+				border-radius: 0;
+				color: $luna-white;
+			}
+
+			&.save {
+				background-color: $luna-success;
+				color: $luna-white;
+				height: fit-content;
+
+				&:disabled {
+					background-color: grey;
+				}
+			}
+		}
+	}
+
+	.container-right {
+		width: 70%;
+
+		form {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+
+			label {
+				color: $luna-white;
+				font-weight: bold;
+				font-size: x-large;
+				margin-top: 2rem;
+
+				&[for="username"] {
+					margin-top: 0.5rem;
+				}
+			}
+
+			input {
+				margin-top: 0.5rem;
+				width: 100%;
+				height: 3rem;
+				border-radius: 25px;
+				background-color: $luna;
+				color: $luna-white;
+				font-weight: bold;
+				padding-left: 1rem;
+
+				&:disabled {
+					margin-top: 2rem;
+					background-color: transparent;
+				}
+
+				&#username {
+					margin-top: 0.5rem;
+					font-size: xx-large;
+					color: $luna-accent;
+				}
+
+				&#confirm-password {
+					margin-bottom: 1rem;
+				}
+			}
 		}
 	}
 }
@@ -575,13 +742,13 @@ nav {
 						color: $luna-white;
 						background-color: $luna;
 						font-weight: bold;
-						height:3vh;
+						height: 3vh;
 						text-align: center;
 						border-radius: 50%;
 						width: 80%;
-						position:absolute;
+						position: absolute;
 						left: 50%;
-						bottom:0;
+						bottom: 0;
 						transform: translate(-50%, 50%)
 					}
 				}
@@ -607,20 +774,20 @@ nav {
 			}
 
 			.character-xp-bar {
-				border-radius:15px;
-				margin-top:5px;
+				border-radius: 15px;
+				margin-top: 5px;
 				background-color: $luna-white;
 
 				.character-xp-bar-value {
 					background-color: $luna-accent;
 					padding: 0.2rem;
-					border-radius:0.6rem;
+					border-radius: 0.6rem;
 				}
 			}
 		}
 
 		.character-button {
-			padding-top:20px;
+			padding-top: 20px;
 			width: 100%;
 			height: 10%;
 			display: flex;

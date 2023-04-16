@@ -10,14 +10,21 @@
 <h1>INSCRIPTION</h1>
 
 
-<form method="post" action="{{path('app_sign_up')}}" id="registrationForm">
+<form method="post" action="{{path('app_sign_up')}}" id="registrationForm" enctype="multipart/form-data">
 	<input type="text" id="username" name="username" value="{{last_credentials['username']}}" placeholder="Nom d'utilisateur" />
 	<input type="email" id="email" name="email" value="{{last_credentials['email']}}" placeholder="Adresse mail" />
 	<input type="password" id="password" name="password" placeholder="Mot de passe" />
 	<input type="password" id="password_confirm" name="password_confirm" placeholder="Confirmez votre mot de passe" />
+	<input type="file" accept="image/*" id="avatar" name="avatar" onchange="imgUpload(event)"/>
+	<label for="avatar" id="avatar-label">Ajouter une image</label>
+	<div id="img-holder" class="img-holder"></div>
 	<button class="submit-button" type="submit" id="submit">Inscription</button>
 </form>
 
 <p class="text">Déjà inscrit ? <a class="underline" href="{{path('app_login')}}">Connectez-vous ici</a></p>
 
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('js/inputFile.js')}}"></script>
 {% endblock %}
