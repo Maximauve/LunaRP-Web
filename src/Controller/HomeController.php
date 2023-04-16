@@ -12,10 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 	public function __construct(private CharacterApiService $characterApiService, private LocalfileApiService $localfileApiService)
-    {
-        $this->characterApiService = $characterApiService;
+	{
+		$this->characterApiService = $characterApiService;
 		$this->localfileApiService = $localfileApiService;
-    }
+	}
 
 	#[Route('/', name: 'app_home')]
 	public function index(Request $request): Response
@@ -28,7 +28,7 @@ class HomeController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			}
 			$data = $this->characterApiService->getCharacterMe($request->getSession()->get('user')->getJwt());
-			foreach ($data as $i=>$character) {
+			foreach ($data as $i => $character) {
 				if ($character["characterId"] !== null) {
 					$img = $this->localfileApiService->getImage($character["characterId"]);
 					$data[$i]["img"] = $img;
@@ -51,7 +51,7 @@ class HomeController extends AbstractController
 					);
 				}
 			}
-			return $this->render('home/index.html.twig', [  
+			return $this->render('home/index.html.twig', [
 				"all_characters" => null,
 			]);
 		}

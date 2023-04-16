@@ -10,6 +10,7 @@ $luna-white : #FFF4DF;
 $luna-accent : #FAA816;
 $luna-error: #922727;
 $luna-success: #07460D;
+$black: #000000;
 
 body {
 	background: linear-gradient(rgba(#021046, 0.8), rgba(#021046, 0.8)), url(/public/images/bg-main.jpg);
@@ -68,11 +69,13 @@ nav {
 			align-items: center;
 			justify-content: flex-start;
 
-			&:hover>.logout-button {
-				display: block;
+			&:hover>.user-button {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 
-			.logout-button {
+			.user-button {
 				// position: absolute;
 				font-size: 1.5rem;
 				color: $luna-accent;
@@ -82,12 +85,16 @@ nav {
 				margin-top: 1vh;
 				background-color: $luna-dark;
 				box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
+				width: 60px;
+				height: 40px;
 				display: none;
 
 				&:hover {
 					background-color: $luna-accent;
 					color: $luna-dark;
-					display: block;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 				}
 			}
 		}
@@ -121,81 +128,130 @@ nav {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-}
 
-.throw {
-	position: absolute;
-	bottom: 17px;
-	right: 87px;
-	padding: 5px;
-	font-size: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 150px;
-	height: 50px;
-	margin-bottom: 0.5em;
-	background-color: $luna-dark;
-	color: $luna-light;
-	border-radius: 100px 0px 0px 100px;
-	border: 2px solid $luna-accent;
-	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
-}
 
-.main-button {
-	position: absolute;
-	bottom: inherit;
-	right: inherit;
-	width: 70px;
-	height: 70px;
-	display: flex;
-	border-radius: 100px;
-	align-items: center;
-	justify-content: center;
-	background-color: $luna;
-	border: 2px solid $luna-accent;
-	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
-
-	img {
-		width: 75%;
-		color: $luna-white;
+	.throw {
+		position: absolute;
+		bottom: 17px;
+		right: 87px;
+		padding: 5px;
+		font-size: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 150px;
+		height: 50px;
+		margin-bottom: 0.5em;
+		background-color: $luna-dark;
+		color: $luna-light;
+		border-radius: 100px 0px 0px 100px;
+		border: 2px solid $luna-accent;
+		box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 	}
-}
 
-.select-dice {
-	position: absolute;
-	bottom: 85px;
-	right: inherit;
-	padding: 0px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 50px;
-	margin-bottom: 1vw;
-	color: $luna-light;
-
-	button {
-		margin-top: 1vh;
+	.main-button {
+		position: absolute;
+		bottom: inherit;
+		right: inherit;
+		width: 70px;
+		height: 70px;
+		display: flex;
+		border-radius: 100px;
+		align-items: center;
+		justify-content: center;
+		background-color: $luna;
+		border: 2px solid $luna-accent;
+		box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 
 		img {
-			display: inline;
-			margin: 0px;
-			width: 50px;
-			height: 50px;
-			padding: 5px;
-			background-color: $luna-dark;
+			width: 75%;
 			color: $luna-white;
-			border-radius: 100px;
-			box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
 		}
 	}
 
+	.select-dice {
+		position: absolute;
+		bottom: 85px;
+		right: inherit;
+		padding: 0px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		margin-bottom: 1vw;
+		color: $luna-light;
 
-}
+		button {
+			margin-top: 1vh;
 
-.dice-hidden {
-	display: none !important;
+			img {
+				display: inline;
+				margin: 0px;
+				width: 50px;
+				height: 50px;
+				padding: 5px;
+				background-color: $luna-dark;
+				color: $luna-white;
+				border-radius: 100px;
+				box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
+			}
+		}
+
+
+	}
+
+	#dice-result {
+		position: absolute;
+		bottom: inherit;
+		right: 250px;
+		// height: 5rem;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		background-color: $luna;
+		color: $luna-white;
+		width: 12rem;
+		border-radius: 15px;
+
+		#dice-close {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 20px;
+			height: 20px;
+			background-color: $luna-dark;
+			border-radius: 0 15px 0 0;
+			border: 1px solid $luna-accent;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding-right: 2px;
+			color: $luna-white;
+			font-size: .7rem;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $luna-accent;
+				font-weight: 600;
+				color: $luna-dark;
+			}
+		}
+
+		#result-nb {
+			font-size: 2rem;
+			font-weight: 600;
+			text-align: center;
+			color: $luna-accent;
+		}
+
+
+	}
+
+	.dice-hidden {
+		display: none !important;
+	}
 }
 
 
@@ -443,73 +499,6 @@ nav {
 }
 
 /*
-	o===========o
-	* PAGE WIKI *
-	o===========o
-*/
-
-.wiki-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 80vh;
-
-	.entities {
-		width: 10%;
-
-		li {
-			width: 100%;
-			text-align: center;
-			color: $luna-white;
-			background-color: $luna;
-			padding-top: 1rem;
-			padding-bottom: 1rem;
-			border-radius: 15px;
-			margin-bottom: 2vh;
-		}
-	}
-
-	.items {
-		width: 10%;
-
-		li {
-			width: 100%;
-			text-align: center;
-			color: $luna-white;
-			background-color: $luna-dark;
-			padding-top: 1rem;
-			padding-bottom: 1rem;
-			border-radius: 15px;
-			margin-bottom: 2vh;
-		}
-	}
-
-	.explanation {
-		color: $luna-white;
-		width: 60%;
-		height: 70%;
-		background-color: $luna-darker;
-		padding-left: 1vw;
-		padding-top: 1vw;
-		border-radius: 15px;
-		box-shadow: 0 0 10px hsl(235, 21%, 11%);
-
-		.name {
-			color: $luna-accent;
-			font-weight: bold;
-			font-size: x-large;
-			margin-bottom: 2vh;
-		}
-
-		.description {
-			color: $luna-white;
-			font-size: normal;
-		}
-	}
-}
-
-/*
 	o==============o
 	* PAGE PROFILE *
 	o==============o
@@ -665,9 +654,9 @@ nav {
 }
 
 /*
-	o===========o
+	o================o
 	* PAGE CHARACTER *
-	o===========o
+	o================o
 */
 
 .main-container {
@@ -1412,6 +1401,265 @@ nav {
 		&:hover {
 			background-color: $luna;
 			color: $luna-accent;
+		}
+	}
+}
+
+/*
+	o===========o
+	* PAGE WIKI *
+	o===========o
+*/
+
+.wiki-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	height: 60vh;
+
+
+
+	.main-nav {
+		height: 100%;
+		width: 12rem;
+
+
+		.main-li {
+			width: 100%;
+			height: 3rem;
+			background-color: $luna;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $luna-white;
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+
+			filter: drop-shadow(5px 10px 5px rgba(0, 0, 0, 0.3));
+
+
+
+			&.selected {
+				&::after {
+					content: "";
+					position: absolute;
+					width: 2.4rem;
+					height: 2.4rem;
+					background-color: $luna;
+					border-radius: 8px;
+					margin-left: 10.5rem;
+					transform: rotate(45deg);
+				}
+			}
+		}
+	}
+
+	.second-nav {
+		height: 100%;
+		width: 22rem;
+		overflow-x: hidden;
+		overflow-y: visible;
+
+		&:hover {
+			&::-webkit-scrollbar-thumb {
+				background-color: $luna-dark;
+				border-radius: 15px;
+			}
+		}
+
+		&::-webkit-scrollbar {
+			background-color: transparent;
+			width: 10px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: transparent;
+			border-radius: 15px;
+		}
+
+
+		.second-li {
+			width: 20rem;
+			height: 3rem;
+			background-color: $luna-dark;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $luna-white;
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+
+			filter: drop-shadow(5px 10px 5px rgba(0, 0, 0, 0.3));
+
+			&.selected {
+				&::after {
+					content: "";
+					position: absolute;
+					width: 2.4rem;
+					height: 2.4rem;
+					background-color: $luna-dark;
+					border-radius: 8px;
+					margin-left: 18.5rem;
+					transform: rotate(45deg);
+				}
+			}
+		}
+
+		.add-element {
+			width: 20rem;
+			height: 3rem;
+			background-color: $luna-accent;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $luna-dark;
+			font-weight: 600;
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+			border: 1px solid $luna-dark;
+			filter: drop-shadow(5px 10px 5px rgba(0, 0, 0, 0.3));
+		}
+	}
+
+	.item-description {
+		height: 100%;
+		width: 40vw;
+		background-color: $luna-darker;
+		border-radius: 20px;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+		padding-top: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		h1 {
+			color: $luna-white;
+			font-size: 2rem;
+			font-weight: 600;
+		}
+
+		img {
+			position: absolute;
+			width: 5vw;
+			object-fit: fill;
+			border-radius: 0 0 0 20px;
+			margin-left: 35vw;
+			margin-top: -4.5rem;
+			border-radius: 0 20px 0 0;
+		}
+
+		p {
+			color: $luna-white;
+			font-size: 1rem;
+			margin-top: 1rem;
+			margin-left: 1rem;
+			padding-right: 5.2vw;
+		}
+
+		form {
+			align-self: flex-start;
+			width: 100%;
+			margin-left: 1rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			height: 75%;
+
+
+			label {
+				font-size: 1.2rem;
+				margin-top: 2rem;
+				color: $luna-white;
+			}
+
+			input {
+				margin-top: 0.5rem;
+				width: 30rem;
+				height: 2rem;
+				background-color: $luna-darker;
+				border-radius: 15px;
+				color: $luna-white;
+				font-size: 1rem;
+				margin-bottom: 1rem;
+				border: 1px solid $luna-white;
+				padding-left: 1rem;
+
+				&::placeholder {
+					color: rgba($luna-light, 0.6);
+				}
+			}
+
+			textarea {
+				margin-top: 0.5rem;
+				width: 30rem;
+				height: 10rem;
+				background-color: $luna-darker;
+				border-radius: 10px 10px 0 10px;
+				color: $luna-white;
+				font-size: 1rem;
+				margin-bottom: 1rem;
+				border: 1px solid $luna-white;
+				padding-left: 1rem;
+				padding-top: 1rem;
+				resize: both;
+				max-width: 95%;
+				max-height: 50%;
+				outline: none;
+
+				&:hover {
+					&::-webkit-scrollbar-thumb {
+						&:hover {
+							cursor: default;
+						}
+
+						background-color: $luna-dark;
+						border-radius: 15px;
+					}
+				}
+
+				&::-webkit-scrollbar {
+					background-color: transparent;
+					width: 10px;
+
+					&:hover {
+						cursor: default;
+					}
+				}
+
+				&::-webkit-scrollbar-thumb {
+					&:hover {
+						cursor: default;
+					}
+
+					background-color: transparent;
+					border-radius: 15px;
+				}
+
+				&::placeholder {
+					color: rgba($luna-light, 0.6);
+				}
+			}
+
+		}
+
+		button[type="submit"] {
+			margin-top: 2rem;
+			width: 12rem;
+			height: 3rem;
+			background-color: $luna-accent;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $luna-dark;
+			font-weight: 600;
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
 		}
 	}
 }

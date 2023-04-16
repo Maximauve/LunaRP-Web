@@ -15,6 +15,8 @@ class User implements UserInterface
 
 	private $roles = [];
 
+	private $role;
+
 	private $jwt;
 
 	private $profilePicture;
@@ -24,13 +26,19 @@ class User implements UserInterface
 	 */
 	private $password;
 
-	public function __construct(int $id, string $username, string $email, string $jwt, ?string $profile_picture)
+	public function __construct(int $id, string $username, string $email, string $jwt, string $role, ?string $profile_picture)
 	{
 		$this->id = $id;
 		$this->username = $username;
 		$this->email = $email;
 		$this->jwt = $jwt;
+		$this->role = $role;
 		$this->profilePicture = $profile_picture;
+	}
+
+	public function getRole(): ?string
+	{
+		return $this->role;
 	}
 
 	public function getId(): ?int

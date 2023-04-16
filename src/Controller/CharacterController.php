@@ -20,7 +20,7 @@ class CharacterController extends AbstractController
 	public function __construct(private CharacterApiService $characterApiService, private ItemApiService $itemApiService, private LocalfileApiService $localfileApiService, private RaceApiService $raceApiService, private ClassApiService $classApiService, private SpellApiService $spellApiService)
 	{
 		$this->characterApiService = $characterApiService;
-        $this->itemApiService = $itemApiService;
+		$this->itemApiService = $itemApiService;
 		$this->localfileApiService = $localfileApiService;
 		$this->raceApiService = $raceApiService;
 		$this->classApiService = $classApiService;
@@ -35,18 +35,18 @@ class CharacterController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			}
 			$data = $this->characterApiService->getCharacterMe($request->getSession()->get('user')->getJwt());
-			foreach ($data as $i=>$character) {
+			foreach ($data as $i => $character) {
 				if ($character["characterId"] !== null) {
 					$img = $this->localfileApiService->getImage($character["characterId"]);
 					$data[$i]["img"] = $img;
 				} else {
 					$data[$i]["img"] = null;
 				}
-            }
+			}
 			if ($request->query->get('id') == null) {
 				$one_character = null;
 			} else {
-				$one_character = $this->characterApiService->getCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+				$one_character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 				if ($one_character["characterId"] !== null) {
 					$one_character["img"] = $this->localfileApiService->getImage($one_character["characterId"]);
 				} else {
@@ -89,7 +89,7 @@ class CharacterController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_character');
 			}
-			$this->characterApiService->deleteCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->characterApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
@@ -119,21 +119,21 @@ class CharacterController extends AbstractController
 			} elseif ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_character');
 			}
-			$character = $this->characterApiService->getCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			if ($character["characterId"] !== null) {
 				$character["img"] = $this->localfileApiService->getImage($character["characterId"]);
 			} else {
 				$character["img"] = null;
 			}
-			foreach ($character["inventory"] as $i=>$item) {
+			foreach ($character["inventory"] as $i => $item) {
 				if ($item["item"]["itemId"] != null) {
 					$item["item"]["img"] = $this->localfileApiService->getImage($item["item"]["itemId"]);
 					$character["inventory"][$i] = $item;
-                } else {
+				} else {
 					$item["item"]["img"] = null;
 					$character["inventory"][$i] = $item;
 				}
-            }
+			}
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
@@ -166,11 +166,11 @@ class CharacterController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$races = $this->raceApiService->getAllRace($request->getSession()->get('user')->getJwt());
-			$classes = $this->classApiService->getAllClasse($request->getSession()->get('user')->getJwt());
-			$items = $this->itemApiService->getAllItem($request->getSession()->get('user')->getJwt());
-			$spells = $this->spellApiService->getAllSpell($request->getSession()->get('user')->getJwt());
-			foreach ($items as $i=>$item) {
+			$races = $this->raceApiService->getAll($request->getSession()->get('user')->getJwt());
+			$classes = $this->classApiService->getAll($request->getSession()->get('user')->getJwt());
+			$items = $this->itemApiService->getAll($request->getSession()->get('user')->getJwt());
+			$spells = $this->spellApiService->getAll($request->getSession()->get('user')->getJwt());
+			foreach ($items as $i => $item) {
 				if ($item["itemId"] != null) {
 					$item["img"] = $this->localfileApiService->getImage($item["itemId"]);
 					$items[$i] = $item;
@@ -178,7 +178,7 @@ class CharacterController extends AbstractController
 					$item["img"] = null;
 					$items[$i] = $item;
 				}
-            }
+			}
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
@@ -212,7 +212,7 @@ class CharacterController extends AbstractController
 	#[Route('/character/createCharacter', name: 'app_character_createCharacter', methods: ['POST'])]
 	public function createCharacterPost(Request $request): Response
 	{
-		
+
 		$name = $request->request->get('name');
 		$race = $request->request->get('race');
 		$classe = $request->request->get('classe');
@@ -249,7 +249,7 @@ class CharacterController extends AbstractController
 		];
 		$formData = new FormDataPart($form);
 		try {
-			$this->characterApiService->createCharacter($request->getSession()->get('user')->getJwt(), $formData);
+			$this->characterApiService->create($request->getSession()->get('user')->getJwt(), $formData);
 			return $this->redirectToRoute('app_character');
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());

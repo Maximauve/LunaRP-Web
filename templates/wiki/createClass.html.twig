@@ -1,0 +1,16 @@
+{% extends 'wiki/wiki.html.twig' %}
+
+{% block title %}Créer une Classe{% endblock %}
+
+{% block description %}
+<h1>Création de classe</h1>
+<form id="createForm" action='{{path('app_wiki_class_create')}}' method="POST">
+	<label for="name">Nom de la classe</label>
+	<input type="text" id="name" name="name" value="{{name}}" placeholder="Nom de la classe">
+	<label for="dice">Dé de la classe</label>
+	<input type="number" id="dice" name="dice" value="{{dice}}" placeholder="Dé de la classe">
+	<label for="description">Description de la classe</label>
+	<textarea id="description" name="description" cols="30" rows="5" value="{{description}}" spellcheck="true"></textarea>
+</form>
+<button type="submit" form="createForm">Créer la classe</button>
+{% endblock %}

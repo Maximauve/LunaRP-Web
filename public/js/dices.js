@@ -22,10 +22,34 @@ const mainDiv = document.getElementById('dices');
 const drawer = document.getElementById('dice-drawer');
 
 throwButton.addEventListener('click', () => {
+	const prevResult = document.getElementById('dice-result') ?? "";
+	if (prevResult !== "") {
+		closeResult(prevResult);
+	}
+
 	const mainDice = document.querySelector('.main-button');
 	const nb = mainDice.id.split('-')[1];
 	const result = Math.floor(Math.random() * nb) + 1;
-	console.log(result);
+
+	const resultDiv = document.createElement('div');
+	resultDiv.id = 'dice-result';
+	const closeButton = document.createElement('button');
+	closeButton.id = 'dice-close';
+	closeButton.innerHTML = '✗';
+	closeButton.addEventListener('click', () => closeResult(resultDiv));
+	const text = document.createElement('p');
+	text.innerHTML = "Vous avez tiré un :";
+	const resultText = document.createElement('p');
+	resultText.id = 'result-nb';
+
+	resultText.innerHTML = result;
+
+	resultDiv.appendChild(closeButton);
+	resultDiv.appendChild(text);
+	resultDiv.appendChild(resultText);
+
+	mainDiv.appendChild(resultDiv);
+
 });
 
 diceArr.forEach((dice) => {
@@ -55,4 +79,11 @@ function sortDrawer() {
 	diceArr.forEach((dice) => {
 		drawer.appendChild(dice);
 	});
+}
+
+function closeResult(div) {
+	while (div.firstChild) {
+		div.removeChild(div.lastChild);
+	}
+	div.remove();
 }

@@ -45,7 +45,10 @@
 						{% set user = app.session.get('user') %}
 						<div class="connected">
 							<a class="profile-pic" href="{{path('app_profile')}}"><img src="{{ user.profilePicture ?? asset('images/default.jpg') }}" /></a>
-							<a class="logout-button" href="{{path('app_logout')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+							{% if user.role is same as('Admin')%}
+								<a class="user-button" href="{{path('app_admin_dashboard')}}"><i class="fa-solid fa-user-gear"></i></a>
+							{% endif %}
+							<a class="user-button" href="{{path('app_logout')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 						</div>
 					{% else %}
 						<a class="profile-pic" href="{{ path('app_login') }}"><img src="{{ asset('images/default.jpg') }}" /></a>
@@ -68,6 +71,11 @@
 					<button id="dice-6"><img src="{{ asset('images/dices/dice-d6.svg') }}"/></button>
 					<button id="dice-4"><img src="{{ asset('images/dices/dice-d4.svg') }}"/></button>
 				</div>
+				{# <div class="dice-result">
+					<button id="dice-close">✗</button>
+					<p>Vous avez tiré un :</p>
+					<p id="dice-result"></p>
+				</div> #}
 			</div>
 
 		  {% block javascripts %}{% endblock %}

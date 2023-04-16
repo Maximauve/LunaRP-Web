@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 
 class ItemApiService
 {
@@ -18,15 +19,14 @@ class ItemApiService
 		return $this->apiUrl;
 	}
 
-	public function createItem(string $token, array $item): array
+	public function create(string $token, FormDataPart $formData): array
 	{
 		$client = HttpClient::create();
+		$headers = $formData->getPreparedHeaders()->toArray();
+		$headers[] = 'Authorization: Bearer ' . $token;
 		$response = $client->request('POST', $this->apiUrl . 'create', [
-			'headers' => [
-				'Content-Type' => 'application/json',
-				'Authorization' => 'Bearer ' . $token,
-			],
-			'json' => $item,
+			'headers' => $headers,
+			'body' => $formData->bodyToIterable(),
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -42,7 +42,7 @@ class ItemApiService
 		return $response->toArray();
 	}
 
-	public function getItem(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class ItemApiService
 		return $response->toArray();
 	}
 
-	public function getAllItem(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class ItemApiService
 		return $response->toArray();
 	}
 
-	public function UpdateItem(string $token, array $item)
+	public function update(string $token, array $item)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class ItemApiService
 		return $response->toArray();
 	}
 
-	public function deleteItem(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WIKI - LunaRP{% endblock %}
+
+{% block body %}
+
+<div class="wiki-container">
+	<ul class="main-nav">
+		<li class="main-li{{ page is same as('class') ? ' selected' : ''}}"><a href="{{path('app_wiki', {page: 'class'})}}">Classes</a></li>
+		<li class="main-li{{ page is same as('race') ? ' selected' : ''}}"><a href="{{path('app_wiki', {page: 'race'})}}">Races</a></li>
+		<li class="main-li{{ page is same as('language') ? ' selected' : ''}}"><a href="{{path('app_wiki', {page: 'language'})}}">Langues</a></li>
+		<li class="main-li{{ page is same as('spell') ? ' selected' : ''}}"><a href="{{path('app_wiki', {page: 'spell'})}}">Sorts</a></li>
+		<li class="main-li{{ page is same as('item') ? ' selected' : ''}}"><a href="{{path('app_wiki', {page: 'item'})}}">Objets</a></li>
+	</ul>
+	<ul class="second-nav">
+		<li class="add-element"><a href="{{path("app_wiki_#{page}")}}">Ajouter un élément</a></li>
+		{% if iterable is not null %}
+			{% for element in iterable %}
+				<li class="second-li{{id is same as(element.id) ? ' selected' : ''}}"><a href="{{path("app_wiki", {page: page, id: element.id})}}">{{ element.name }}</a></li>
+			{% endfor %}
+		{% else %}
+			<li class="second-li">Aucun élément</li>
+		{% endif %}
+	</ul>
+	<div class="item-description">
+		{% block description %}
+			{% if item is not null %}
+				<h1>{{ item.name }}</h1>
+				{% if item.img is defined %}
+					<img src="{{item.img}}" alt="{{item.name}}" />
+				{% endif %}
+				<p>{{item.description}}</p>
+			{% else %}
+				<h1>{{frPage}}</h1>
+				<p>Hmm, c'est un peu vide par ici...</p>
+				<p>Cette section du wiki manque d'éléments, n'hésitez-pas à en rajouter !</p>
+			{% endif %}
+		{% endblock %}
+	</div>
+</div>
+
+{% endblock %}

@@ -18,7 +18,7 @@ class CampainApiService
 		return $this->apiUrl;
 	}
 
-	public function createCampain(string $token, array $campain): array
+	public function create(string $token, array $campain): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -42,7 +42,7 @@ class CampainApiService
 		return $response->toArray();
 	}
 
-	public function getCampain(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class CampainApiService
 		return $response->toArray();
 	}
 
-	public function getAllCampain(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class CampainApiService
 		return $response->toArray();
 	}
 
-	public function UpdateCampain(string $token, array $campain)
+	public function update(string $token, array $campain)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class CampainApiService
 		return $response->toArray();
 	}
 
-	public function deleteCampain(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [
