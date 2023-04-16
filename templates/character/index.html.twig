@@ -11,7 +11,11 @@
                 {% for character in all_characters %}
                 <a href="{{ path('app_character', { 'id': character.id }) }}">
                 <li>
-                    <img src="{{ asset('/images/default.jpg') }}"/>
+                    {% if character.img is not null %}
+                        <img src="{{ character.img }}"/>
+                    {% else %}
+                        <img src="{{ asset('/images/default.jpg') }}"/>
+                    {% endif %}
                     <div>
                         <p class="name">{{ character.name }}</p>
                         <p class="infos">
@@ -37,7 +41,7 @@
                 </div>
             </ul>
         {% endif %}
-		<button class="add">+</button>
+		<a href="{{ path('app_character_create')}}" class="add">+</a>
 	</div>
 	<div class="character-main">
         {% if one_character is not null %}
@@ -75,7 +79,11 @@
                     </div>
                 </div>
                 <div class="character-col-img">
-                    <img src="{{asset('/images/default.jpg')}}"/>
+                    {% if one_character.img is not null %}
+                        <img src="{{ one_character.img }}"/>
+                    {% else %}
+                        <img src="{{ asset('/images/default.jpg') }}"/>
+                    {% endif %}
                 </div>
                 <div class="character-col-stats ml-5">
                     <div class="character-stat">

@@ -69,6 +69,7 @@ class RegistrationController extends AbstractController
 					);
 				}
 			}
+
 			return $this->render('registration/index.html.twig', [
 				'last_credentials' => ["email" => $email, "username" => $username]
 			]);
