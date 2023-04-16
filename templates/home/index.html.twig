@@ -6,117 +6,37 @@
 <div class="main-container">
 	<div class="home-main">
 		<p class="title">MES PERSONNAGES</p>
-		<ul>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			<li>
-				<img src="{{asset('/images/default.jpg')}}"/>
-				<div>
-					<p class="name">Jhon Doe</p>
-					<p class="infos">Classe, Race...</p>
-				</div>
-			</li>
-			{# <li>test</li>
-			<li>haha</li>
-			<li>hihi</li> #}
-		 {# Mettre tous les personnages #}
-		</ul>
+        {% if all_characters|length > 0 %}
+            <ul>
+                {% for character in all_characters %}
+                <a href="{{ path('app_character', { 'id': character.id }) }}">
+                <li>
+                    <img src="{{ asset('/images/default.jpg') }}"/>
+                    <div>
+                        <p class="name">{{ character.name }}</p>
+                        <p class="infos">
+                            {% if character.race is not null and character.classe is not null %}
+                                {{ character.race.name }}, {{ character.classe.name }}
+                            {% elseif character.classe is not null %}
+                                {{ character.classe.name }}
+                            {% elseif character.race is not null %}
+                                {{ character.race.name }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </li>
+                </a>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <ul>
+                <div class="flex justify-center items-center h-full no-found-info">
+                    <div class="no-found text-lg px-6 py-5" role="alert">
+                        Aucun personnages trouvés
+                    </div>
+                </div>
+            </ul>
+        {% endif %}
 		<button class="add">+</button>
 	</div>
 	<div class="home-main">

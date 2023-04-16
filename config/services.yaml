@@ -32,6 +32,22 @@ services:
     arguments:
       $apiUrl: "%env(API_URL)%"
   App\Controller\UserController:
+  App\Service\ItemApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\LanguageApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\RaceApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\SpellApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\ClassApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\CampainApiService:
     arguments:
       $apiUrl: "%env(API_URL)%"
 

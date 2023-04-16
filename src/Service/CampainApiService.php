@@ -10,7 +10,7 @@ class CampainApiService
 
 	public function __construct(string $apiUrl)
 	{
-		$this->apiUrl = $apiUrl . "/campains/";
+		$this->apiUrl = $apiUrl . "/campaigns/";
 	}
 
 	public function getAPIUrl(): string
@@ -24,9 +24,9 @@ class CampainApiService
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $campain,
+			'json' => $campain,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -48,8 +48,8 @@ class CampainApiService
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -65,14 +65,14 @@ class CampainApiService
 		return $response->toArray();
 	}
 
-	public function getCampains(string $token): array
+	public function getAllCampain(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -94,9 +94,9 @@ class CampainApiService
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $campain,
+			'json' => $campain,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -118,9 +118,9 @@ class CampainApiService
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => [
+			'json' => [
 				'id' => $id,
 			],
 		]);

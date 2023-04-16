@@ -1,20 +1,118 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CharacterController!{% endblock %}
+{% block title %}LunaRP{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/maxmo/Documents/Ynov/B3/Projet-Dev/LunaRP-Web/src/Controller/CharacterController.php'|file_link(0) }}">src/Controller/CharacterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/maxmo/Documents/Ynov/B3/Projet-Dev/LunaRP-Web/templates/character/index.html.twig'|file_link(0) }}">templates/character/index.html.twig</a></code></li>
-    </ul>
+<div class="main-container">
+	<div class="home-main">
+		<p class="title">MES PERSONNAGES</p>
+        {% if all_characters|length > 0 %}
+            <ul>
+                {% for character in all_characters %}
+                <a href="{{ path('app_character', { 'id': character.id }) }}">
+                <li>
+                    <img src="{{ asset('/images/default.jpg') }}"/>
+                    <div>
+                        <p class="name">{{ character.name }}</p>
+                        <p class="infos">
+                            {% if character.race is not null and character.classe is not null %}
+                                {{ character.race.name }}, {{ character.classe.name }}
+                            {% elseif character.classe is not null %}
+                                {{ character.classe.name }}
+                            {% elseif character.race is not null %}
+                                {{ character.race.name }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </li>
+                </a>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <ul>
+                <div class="flex justify-center items-center h-full no-found-info">
+                    <div class="no-found text-lg px-6 py-5" role="alert">
+                        Aucun personnages trouvés
+                    </div>
+                </div>
+            </ul>
+        {% endif %}
+		<button class="add">+</button>
+	</div>
+	<div class="character-main">
+        {% if one_character is not null %}
+            <div class="character-summary">
+                <div>
+                    <p class="character-name">{{ one_character.name }}</p>
+                    <p class="character-infos">
+                        {% if one_character.race is not null %}
+                            {{ one_character.race.name }},
+                        {% endif %}
+                        {% if one_character.classe is not null %}
+                            {{ one_character.classe.name }},
+                        {% endif %}
+                        {{ one_character.alignment }}
+                    </p>
+                </div>
+                <p class="character-level">Niveau {{ one_character.level }}</p>
+            </div>
+            <div class="character-stats">
+                <div class="character-col-stats mr-5">
+                    <div class="character-stat">
+                        <p class="character-stat-name">Constitution</p>
+                        <p class="character-stat-value">{{ one_character.constitution }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Dextérité</p>
+                        <p class="character-stat-value">{{ one_character.dexterity }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Intelligence</p>
+                        <p class="character-stat-value">{{ one_character.intelligence }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                </div>
+                <div class="character-col-img">
+                    <img src="{{asset('/images/default.jpg')}}"/>
+                </div>
+                <div class="character-col-stats ml-5">
+                    <div class="character-stat">
+                        <p class="character-stat-name">Force</p>
+                        <p class="character-stat-value">{{ one_character.strength }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Sagesse</p>
+                        <p class="character-stat-value">{{ one_character.wisdom }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Charisme</p>
+                        <p class="character-stat-value">{{ one_character.charisma }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="character-xp">
+                <p>Points d'expérience</p>
+                <div class="character-xp-bar">
+                    <div class="character-xp-bar-value" style="width: {{ one_character.experience }}%"></div>
+                </div>
+            </div>
+            <div class="character-button">
+                <a class="character-button-item" href="">Voir</a>
+                <a class="character-button-item" href="">Editer</a>
+                <a class="character-button-danger" href="{{ path('app_character_delete', {'id': one_character.id})}}">Supprimer</a>
+            </div>
+        {% else %}
+            <div class="flex justify-center items-center h-full no-found-info">
+                <div class="no-found text-lg px-6 py-5" role="alert">
+                    Choississez un personnage
+                </div>
+            </div>
+        {% endif %}
+	</div>
 </div>
 {% endblock %}

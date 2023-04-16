@@ -84,6 +84,12 @@ class UserApiService
 			throw new \Exception($json['message'][0]);
 		}
 
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 200) {
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
+		}
+
 		$user = $response->toArray();
 		if (isset($user['userId'])) {
 			$img = "/local-files/" . $user['userId'];
@@ -92,6 +98,46 @@ class UserApiService
 		}
 
 		return new User($user['id'], $user['username'], $user['email'], $jwt, $img);
+	}
+
+	public function getAllUser(string $token): array
+	{
+		$client = HttpClient::create();
+		$response = $client->request('GET', $this->apiUrl, [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
+			],
+		]);
+
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 200) {
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
+		}
+
+		return $response->toArray();
+	}
+
+	public function deleteUser(string $token, int $id): array
+	{
+		$client = HttpClient::create();
+		$response = $client->request('POST', $this->apiUrl . 'delete', [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
+			],
+			'json' => [
+				'id' => $id,
+			],
+		]);
+
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 200) {
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
+		}
+		return $response->toArray();
 	}
 
 	public function UpdateUser(string $jwt, FormDataPart $formData)
