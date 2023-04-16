@@ -85,7 +85,7 @@ class CharacterController extends AbstractController
         return $this->redirectToRoute('app_character');
     }
 
-    #[Route('/character/view', name: 'app_character', methods: ['GET'])]
+    #[Route('/character/view', name: 'app_character_view', methods: ['GET'])]
     public function viewCharacter(Request $request): Response
     {
         try {
