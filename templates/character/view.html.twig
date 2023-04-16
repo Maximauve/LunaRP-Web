@@ -1,3 +1,86 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}LunaRP{% endblock %}
+
+{% block body %}
+<div class="main-container">
+    <div class="character-main">
+        {% if character is not null %}
+            <div class="character-summary">
+                <div>
+                    <p class="character-name">{{ character.name }}</p>
+                    <p class="character-infos">
+                        {% if character.race is not null %}
+                            {{ character.race.name }},
+                        {% endif %}
+                        {% if character.classe is not null %}
+                            {{ character.classe.name }},
+                        {% endif %}
+                        {{ character.alignment }}
+                    </p>
+                </div>
+                <p class="character-level">Niveau {{ character.level }}</p>
+            </div>
+            <div class="character-stats">
+                <div class="character-col-stats mr-5">
+                    <div class="character-stat">
+                        <p class="character-stat-name">Constitution</p>
+                        <p class="character-stat-value">{{ character.constitution }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Dextérité</p>
+                        <p class="character-stat-value">{{ character.dexterity }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Intelligence</p>
+                        <p class="character-stat-value">{{ character.intelligence }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                </div>
+                <div class="character-col-img">
+                    <img src="{{asset('/images/default.jpg')}}"/>
+                </div>
+                <div class="character-col-stats ml-5">
+                    <div class="character-stat">
+                        <p class="character-stat-name">Force</p>
+                        <p class="character-stat-value">{{ character.strength }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Sagesse</p>
+                        <p class="character-stat-value">{{ character.wisdom }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                    <div class="character-stat">
+                        <p class="character-stat-name">Charisme</p>
+                        <p class="character-stat-value">{{ character.charisma }}</p>
+                        <p class="character-add-stat">+2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="character-xp">
+                <p>Points d'expérience</p>
+                <div class="character-xp-bar">
+                    <div class="character-xp-bar-value" style="width: {{ character.experience }}%"></div>
+                </div>
+            </div>
+        {% else %}
+            <div class="flex justify-center items-center h-full no-found-info">
+                <div class="no-found text-lg px-6 py-5" role="alert">
+                    Choississez un personnage
+                </div>
+            </div>
+        {% endif %}
+	</div>
+    <div class="character-main">
+        <div class="character-inventory">
+            <p>Inventaire</p>
+        </div>
+        <div class="character-spells">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

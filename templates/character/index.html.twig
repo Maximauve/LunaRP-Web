@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="character-button">
-                <a class="character-button-item" href="">Voir</a>
+                <a class="character-button-item" href="{{ path('app_character_view', {'id': one_character.id })}}">Voir</a>
                 <a class="character-button-item" href="">Editer</a>
                 <a class="character-button-danger" href="{{ path('app_character_delete', {'id': one_character.id})}}">Supprimer</a>
             </div>
