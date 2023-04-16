@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 use Symfony\Component\HttpClient\HttpClient;
 
 class CharacterApiService
@@ -18,15 +19,14 @@ class CharacterApiService
 		return $this->apiUrl;
 	}
 
-	public function createCharacter(string $token, array $character): array
+	public function createCharacter(string $token, FormDataPart $character): array
 	{
 		$client = HttpClient::create();
+		$headers = $character->getPreparedHeaders()->toArray();
+		$headers[] = 'Authorization: Bearer ' . $token;
 		$response = $client->request('POST', $this->apiUrl . 'create', [
-			'headers' => [
-				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
-			],
-			'json' => $character,
+			'headers' => $headers,
+			'body' => $character->bodyToIterable(),
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -38,7 +38,7 @@ class CharacterApiService
 				throw new \Exception($json['message']);
 			}
 		}
-
+		
 		return $response->toArray();
 	}
 

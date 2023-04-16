@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LunaRP{% endblock %}
+
+{% block body %}
+<form action="{{ path( 'app_character_createCharacter' )}}" method="post" id="createCharacter" enctype="multipart/form-data">
+    <div class="home-container">
+        <div class="charac-container">
+            <div class="charac-infos">
+                <input type="text" name="name" placeholder="Nom du personnage">
+                <select id="race" name="race">
+                    <option value="" disabled selected>Recherche...</option>
+                    {% for race in all_races %}
+                        <option value="{{ race.id }}">{{ race.name }}</option>
+                    {% endfor %}
+                </select>
+                <select id="classe" name="classe">
+                    <option value="" disabled selected>Recherche...</option>
+                    {% for classe in all_classes %}
+                        <option value="{{ classe.id }}">{{ classe.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="alignment" placeholder="Alignement">
+                <textarea id="description" name="description" rows="6" cols="50" maxlength="255" placeholder="Description"></textarea>
+                <div class="character-pp">
+                    <label for="avatar"><i class="fa-solid fa-file-image"></i></label>
+                    <div id="img-holder" class="img-holder"></div>
+                    <img src="{{ user.profilePicture ?? asset('images/default.jpg') }}" alt="Photo de profil" class="large-profile-pic" />
+                    <input class="profile-input" type="file" accept="image/*" id="avatar" name="avatar" onchange="imgUpload(event)" style="display:none;"/>
+                </div>
+            </div>
+            <div class="charac-stats">
+                <input type="text" name="niveau" placeholder="Niveau">
+                <input type="text" name="experience" placeholder="Point d'expériences">
+                <div class="ability">
+                    <input type="text" name="force" class="left" placeholder="Force">
+                    <input type="text" name="dexterite" class="left" placeholder="Dextérité">
+                    <input type="text" name="constitution"  placeholder="Constitution">
+                    <input type="text" name="intelligence" class="left" placeholder="Intelligence">
+                    <input type="text" name="sagesse" class="left" placeholder="Sagesse">
+                    <input type="text" name="charisme" placeholder="Charisme">
+                </div>
+            </div>
+        </div>
+        <div class="charac-container-r">
+            <div class="character-inventory">
+                <p class="character-title">Inventaire</p>
+                <select id="item" name="item">
+                    <option value="" disabled selected>Recherche...</option>
+                    {% for item in all_items %}
+                        <option value="{{ item.id }}|{{item.img}}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="character-inventory-items" id="inventory-items">
+
+                </div>
+            </div>
+            <div class="character-spells">
+                <p class="character-title">Sorts</p>
+                <select id="spell" name="spell">
+                    <option value="" disabled selected>Recherche...</option>
+                    {% for spell in all_spells %}
+                        <option value="{{ spell.id }}|{{spell.name}}|{{spell.level}}">{{ spell.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="character-spells-list" id="spells-items">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="all-buttons">
+        <input type="submit" class="character-button" value="Valider"></input>
+    </div>
+</form>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/createSpell.js') }}"></script>
+    <script src="{{ asset('js/updateProfile.js') }}"></script>
+{% endblock %}

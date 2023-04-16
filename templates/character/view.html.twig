@@ -40,7 +40,11 @@
                     </div>
                 </div>
                 <div class="character-col-img">
-                    <img src="{{asset('/images/default.jpg')}}"/>
+                    {% if character.img is not null %}
+                        <img src="{{ character.img }}"/>
+                    {% else %}
+                        <img src="{{ asset('/images/default.jpg') }}"/>
+                    {% endif %}
                 </div>
                 <div class="character-col-stats ml-5">
                     <div class="character-stat">
@@ -76,11 +80,49 @@
 	</div>
     <div class="character-main">
         <div class="character-inventory">
-            <p>Inventaire</p>
+            <p class="character-title">Inventaire</p>
+            <div class="character-inventory-items">
+                {% if character is not null %}
+                    {% for item_character in character.inventory %}
+                        <div class="character-inventory-item">
+                        {% if item_character.item.img is not null %}
+                            <img src="{{item_character.item.img}}"/>
+                        {% else %}
+                            <img src="{{asset('/images/default.jpg')}}"/>
+                        {% endif %}
+                        {% if item_character.quantity > 1 %}
+                            <p class="character-quantity">x{{ item_character.quantity }}</p>
+                        {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
         <div class="character-spells">
-
+            <div class="character-all-titles">
+                <button class="character-title" id="sorts">Sorts</button>
+                <button class="character-title" id="description">Description</button>
+            </div>
+            <div class="hidden character-spells-list" id="spell-list">
+                {% if character is not null %}
+                    {% for spell in character.spells %}
+                        <div class="character-spell">
+                            <p class="character-spell-name">{{ spell.name }}</p>
+                            <p class="character-spell-level">Niveau {{ spell.level }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="character-spell-description" id="spell-description">
+                <div class="character-spell-description-content">
+                    <p>{{ character.description }}</p>
+                </div>
+            </div>    
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('js/spells.js')}}"></script>
 {% endblock %}

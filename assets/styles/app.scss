@@ -29,7 +29,7 @@ nav {
 	flex-direction: row;
 	justify-content: center;
 	height: 10vh;
-	margin-bottom: 10vh;
+	margin-bottom: 5vh;
 
 	.luna {
 		font-size: 2.5rem;
@@ -297,6 +297,7 @@ nav {
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: space-evenly;
+	margin-top:10vh;
 	height: 80vh;
 
 	.home-main {
@@ -374,7 +375,9 @@ nav {
 				margin-top: 1vh;
 
 				img {
-					height: 200%;
+					height: 55px;
+					width: 55px;
+					object-fit: cover;
 					border-radius: 15px 0 0 15px;
 					margin-right: 2%;
 				}
@@ -403,7 +406,10 @@ nav {
 			background-color: $luna-accent;
 			color: $luna-white;
 			height: 6vh;
+			padding:10px;
 			border-radius: 0px 0px 15px 15px;
+			text-align: center;
+			cursor: pointer;
 		}
 	}
 }
@@ -756,11 +762,20 @@ nav {
 				}
 			}
 
-			.character-col-img img {
-				max-height: 95%;
-				object-fit: cover;
-				border-radius: 1rem;
+			.character-col-img {
+				width: 70%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				img {
+					max-height: 95%;
+					object-fit: cover;
+					border-radius: 1rem;
+					height: 85%;
+				}
 			}
+
 		}
 
 		.character-xp {
@@ -825,12 +840,578 @@ nav {
 		.character-inventory {
 			background-color: $luna;
 			color: $luna-accent;
-			height: 50%;
+			height: auto;
 			width: 100%;
 			border-radius: 1rem;
 			padding: 1vh 2vh 1vh 2vh;
 			font-size: x-large;
 			font-weight: bold;
+
+			.character-title {
+				margin-bottom: 1vh;
+			}
+
+			.character-inventory-items {
+				width:100%;
+				height:80%;
+				display: grid;
+				grid: repeat(3, 60px) / auto-flow 60px;
+				place-items: center;
+				overflow-x: auto;
+				overflow-y: hidden;
+
+				&:hover {
+					&::-webkit-scrollbar-thumb {
+						background-color: $luna-light;
+						border-radius: 15px;
+						box-shadow: 0 0 3px hsl(235, 21%, 11%);
+					}
+				}
+	
+				&::-webkit-scrollbar {
+					background-color: $luna;
+					width: 10px;
+				}
+	
+				&::-webkit-scrollbar-thumb {
+					background-color: $luna;
+					border-radius: 15px;
+				}
+
+				.character-inventory-item {
+					position: relative;
+
+					.character-quantity {
+						position:absolute;
+						bottom:-5px;
+						right:-5px;
+						color: $luna-white;
+						font-size: small;
+						user-select: none;
+					}
+				}
+
+				.character-inventory-item img {
+					width: 5vh;
+					height: 5vh;
+					object-fit: cover;
+					border-radius: 1rem;
+					border: 2px solid $luna-dark;
+
+				}
+
+			}
+		}
+
+		.character-spells {
+			height: 50%;
+			width: 100%;
+			margin-top: 20px;
+			border-radius: 1rem;
+			padding: 1vh 2vh 1vh 2vh;
+			background-color: $luna;
+			color: $luna-accent;
+			font-size: x-large;
+			font-weight: bold;
+
+			.character-all-titles {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-left: 2vw;
+
+				.character-title {
+					margin-right: 2vw;
+				}
+			}
+
+			.character-spells-list {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow-y: auto;
+				height: 80%;
+				margin-bottom:5px;
+
+				&:hover {
+					&::-webkit-scrollbar-thumb {
+						background-color: $luna-light;
+						border-radius: 15px;
+						box-shadow: 0 0 3px hsl(235, 21%, 11%);
+					}
+				}
+	
+				&::-webkit-scrollbar {
+					background-color: $luna;
+					width: 10px;
+				}
+	
+				&::-webkit-scrollbar-thumb {
+					background-color: $luna;
+					border-radius: 15px;
+				}
+	
+				.character-spell {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					justify-content: space-between;
+					margin-bottom: 1vh;
+					padding: 1vh 2vh 1vh 2vh;
+					margin: 5px 0 5px 0;
+					border-radius: 1rem;
+					background-color: $luna-dark;
+					width: 95%;
+	
+					.character-spell-name {
+						font-size: large;
+						font-weight: bold;
+						color: $luna-white;
+					}
+	
+					.character-spell-level {
+						font-size: large;
+						font-weight: bold;
+						color: $luna-accent;
+					}
+				}
+			}
+
+			.character-spell-description {
+				height: 80%;
+				transition: 0.4s ease-in-out;
+
+				.character-spell-description-content {
+					height: 100%;
+					overflow-y: auto;
+					padding: 1vh 2vh 1vh 2vh;
+					margin-top:10px;
+					border-radius: 1rem;
+					background-color: $luna-dark;
+					font-size: medium;
+					color: $luna-white;
+
+					&:hover {
+						&::-webkit-scrollbar-thumb {
+							background-color: $luna-light;
+							border-radius: 15px;
+							box-shadow: 0 0 3px hsl(235, 21%, 11%);
+						}
+					}
+		
+					&::-webkit-scrollbar {
+						background-color: $luna;
+						width: 10px;
+					}
+		
+					&::-webkit-scrollbar-thumb {
+						background-color: $luna;
+						border-radius: 15px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.home-container {
+	height:80%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	
+	.charac-container {
+		width: 40%;
+		height: 100%;
+
+		.charac-infos {
+			
+			display:flex;
+			border-radius: 1rem;
+			background-color: $luna;
+			flex-direction: column;
+			padding: 1rem;
+			position: relative;
+
+			input[type=text] {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 40%;
+				height: 3rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding-left: 1rem;
+
+				&::placeholder {
+					color: $luna-accent;
+					opacity: 1;
+				}
+			}
+
+			select {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 40%;
+				height: 3rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding: 0 1rem 0 1rem;
+			}
+
+			textarea {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 100%;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding-top: 1rem;
+				padding-left: 1rem;
+				resize: none;
+
+				&::placeholder {
+					color: $luna-accent;
+					opacity: 1;
+				}
+			}
+
+			.character-pp {
+				position:absolute;
+				top: 10px;
+				right: 10px;
+
+				.delete-img {
+					position: absolute;
+					align-self: flex-end;
+					margin-left: 9vw;
+					margin-top: 9.4vw;
+					background-color: $luna-dark;
+					color: $luna-accent;
+					border-radius: 15px 0 0 0;
+					border: 1px solid $luna-accent;
+					width: 2vw;
+					cursor: pointer;
+				}
+		
+				.file-name {
+					position: absolute;
+					width: max-content;
+					max-width: 11vw;
+					margin-top: -1vh;
+					background-color: $luna-dark;
+					color: $luna-white;
+					border-radius: 100px;
+					border: 1px solid $luna-accent;
+					padding-left: 1vw;
+					padding-right: 1vw;
+				}
+
+				.img-holder {
+					width: 11vw;
+					height: 11vw;
+					position: absolute;
+					z-index: 1;
+					display: flex;
+					justify-content: center;
+				}
+		
+				img {
+					width: 11vw;
+					height: 11vw;
+					object-fit: cover;
+					border-radius: 25px 25px 0 0;
+				}
+		
+				label {
+					z-index: 2;
+					cursor: pointer;
+					font-size: 3rem;
+					border-radius: 25px 25px 0 0;
+					color: $luna-accent;
+					background-color: rgba($luna-white, 0.5);
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					position: absolute;
+					width: 11vw;
+					height: 11vw;
+				}
+			}
+
+		}
+
+		.charac-stats {
+
+			display:flex;
+			border-radius: 1rem;
+			background-color: $luna;
+			flex-direction: column;
+			padding: 1rem;
+			margin-top:10px;
+
+			input[type=text] {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 40%;
+				height: 3rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding-left: 1rem;
+
+				&::placeholder {
+					color: $luna-accent;
+					opacity: 1;
+				}
+			}
+
+			select {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 40%;
+				height: 3rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding: 0 1rem 0 1rem;
+			}
+
+			textarea {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 100%;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				padding-top: 1rem;
+				padding-left: 1rem;
+				resize: none;
+
+				&::placeholder {
+					color: $luna-accent;
+					opacity: 1;
+				}
+			}
+
+			.ability {
+				display:flex;
+				flex-wrap: wrap;
+
+				input {
+					flex:1 1 30%;
+
+					&.left {
+						margin-right: 20px;
+					}
+				}
+			}
+		}
+	}
+
+	.charac-container-r {
+		width: 40%;
+		height: 100%;
+
+		.character-inventory {
+			background-color: $luna;
+			color: $luna-accent;
+			height: auto;
+			width: 100%;
+			border-radius: 1rem;
+			padding: 1vh 2vh 1vh 2vh;
+			font-size: x-large;
+			font-weight: bold;
+
+			.character-title {
+				margin-bottom: 1vh;
+			}
+
+			select {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 100%;
+				height: 2rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				font-size: medium;
+				padding: 0 1rem 0 1rem;
+			}
+
+			.character-inventory-items {
+				width:100%;
+				height:80%;
+				display: grid;
+				grid: repeat(3, 60px) / auto-flow 60px;
+				place-items: center;
+				overflow-x: auto;
+				overflow-y: hidden;
+
+				&:hover {
+					&::-webkit-scrollbar-thumb {
+						background-color: $luna-light;
+						border-radius: 15px;
+						box-shadow: 0 0 3px hsl(235, 21%, 11%);
+					}
+				}
+	
+				&::-webkit-scrollbar {
+					background-color: $luna;
+					width: 10px;
+				}
+	
+				&::-webkit-scrollbar-thumb {
+					background-color: $luna;
+					border-radius: 15px;
+				}
+
+				.character-inventory-item {
+					position: relative;
+
+					.character-quantity {
+						position:absolute;
+						bottom:-5px;
+						right:-5px;
+						color: $luna-white;
+						font-size: small;
+						user-select: none;
+					}
+				}
+
+				.character-inventory-item img {
+					width: 5vh;
+					height: 5vh;
+					object-fit: cover;
+					border-radius: 1rem;
+					border: 2px solid $luna-dark;
+
+				}
+			}
+		}
+
+		.character-spells {
+			height: auto;
+			width: 100%;
+			margin-top: 20px;
+			border-radius: 1rem;
+			padding: 1vh 2vh 1vh 2vh;
+			background-color: $luna;
+			color: $luna-accent;
+			font-size: x-large;
+			font-weight: bold;
+
+			.character-title {
+				margin-right: 2vw;
+			}
+
+			select {
+				border-radius: 15px;
+				color: $luna-accent;
+				margin-top: 0.5rem;
+				width: 100%;
+				height: 2rem;
+				border-radius: 25px;
+				border: none;
+				background-color: $luna-dark;
+				font-weight: bold;
+				font-size: medium;
+				padding: 0 1rem 0 1rem;
+			}
+
+			.character-spells-list {
+				height: 30vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow-y: auto;
+				margin-bottom:10px;
+
+				&:hover {
+					&::-webkit-scrollbar-thumb {
+						background-color: $luna-light;
+						border-radius: 15px;
+						box-shadow: 0 0 3px hsl(235, 21%, 11%);
+					}
+				}
+	
+				&::-webkit-scrollbar {
+					background-color: $luna;
+					width: 10px;
+				}
+	
+				&::-webkit-scrollbar-thumb {
+					background-color: $luna;
+					border-radius: 15px;
+				}
+	
+				.character-spell {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					justify-content: space-between;
+					margin-bottom: 1vh;
+					padding: 1vh 2vh 1vh 2vh;
+					margin: 5px 0 5px 0;
+					border-radius: 1rem;
+					background-color: $luna-dark;
+					width: 95%;
+	
+					.character-spell-name {
+						font-size: large;
+						font-weight: bold;
+						color: $luna-white;
+					}
+	
+					.character-spell-level {
+						font-size: large;
+						font-weight: bold;
+						color: $luna-accent;
+					}
+				}
+			}
+		}
+	}
+}
+
+.all-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-top:20px;
+
+	input[type=submit] {
+		background-color: $luna-accent;
+		color: $luna-white;
+		border: none;
+		border-radius: 25px;
+		padding: 1rem 5rem 1rem 5rem;
+		font-size: x-large;
+		font-weight: bold;
+		cursor: pointer;
+		transition: 0.3s;
+
+		&:hover {
+			background-color: $luna;
+			color: $luna-accent;
 		}
 	}
 }

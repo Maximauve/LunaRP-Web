@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\CharacterApiService;
+use App\Service\LocalfileApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,9 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-	public function __construct(private CharacterApiService $characterApiService)
+	public function __construct(private CharacterApiService $characterApiService, private LocalfileApiService $localfileApiService)
     {
         $this->characterApiService = $characterApiService;
+		$this->localfileApiService = $localfileApiService;
     }
 
 	#[Route('/', name: 'app_home')]
@@ -26,6 +28,14 @@ class HomeController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			}
 			$data = $this->characterApiService->getCharacterMe($request->getSession()->get('user')->getJwt());
+			foreach ($data as $i=>$character) {
+				if ($character["characterId"] !== null) {
+					$img = $this->localfileApiService->getImage($character["characterId"]);
+					$data[$i]["img"] = $img;
+				} else {
+					$data[$i]["img"] = null;
+				}
+			}
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {

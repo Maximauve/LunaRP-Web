@@ -52,6 +52,9 @@ services:
   App\Service\CampainApiService:
     arguments:
       $apiUrl: "%env(API_URL)%"
+  App\Service\LocalfileApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
