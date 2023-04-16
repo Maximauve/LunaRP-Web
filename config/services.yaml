@@ -32,6 +32,8 @@ services:
     arguments:
       $apiUrl: "%env(API_URL)%"
   App\Controller\UserController:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
   App\Service\ItemApiService:
     arguments:
       $apiUrl: "%env(API_URL)%"

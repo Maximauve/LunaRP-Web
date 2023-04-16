@@ -139,11 +139,10 @@ class AdminController extends AbstractController
 					);
 				}
 			}
-
-			return $this->render('admin/character.html.twig', [
-				"all_characters" => $data,
-			]);
 		}
+		return $this->render('admin/character.html.twig', [
+			"all_characters" => $data,
+		]);
 	}
 
 	#[Route('/admin/characterDelete', name: 'admin_delete_character', methods: ['GET'])]

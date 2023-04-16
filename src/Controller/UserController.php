@@ -59,7 +59,6 @@ class UserController extends AbstractController
 		}
 		$formData = new FormDataPart($form);
 
-		dump($formData);
 		try {
 			$response = $this->userApi->UpdateUser($user->getJwt(), $formData);
 		} catch (\Exception $e) {
@@ -79,7 +78,6 @@ class UserController extends AbstractController
 			}
 			return $this->redirectToRoute('app_profile');
 		}
-		dump($response);
 		$updatedUser = $this->userApi->getUser($user->getJwt(), $user->getId());
 		$updatedUser->setProfilePicture($this->apiUrl . $updatedUser->getProfilePicture());
 
