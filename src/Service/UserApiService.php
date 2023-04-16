@@ -69,7 +69,7 @@ class UserApiService
 		return $response->toArray();
 	}
 
-	public function getUser(string $jwt, int $id): User
+	public function get(string $jwt, int $id): User
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -97,10 +97,10 @@ class UserApiService
 			$img = null;
 		}
 
-		return new User($user['id'], $user['username'], $user['email'], $jwt, $img);
+		return new User($user['id'], $user['username'], $user['email'], $jwt, $user["role"], $img);
 	}
 
-	public function getAllUser(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -119,7 +119,7 @@ class UserApiService
 		return $response->toArray();
 	}
 
-	public function deleteUser(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'delete', [
@@ -140,7 +140,7 @@ class UserApiService
 		return $response->toArray();
 	}
 
-	public function UpdateUser(string $jwt, FormDataPart $formData)
+	public function update(string $jwt, FormDataPart $formData)
 	{
 		$client = HttpClient::create();
 		$headers = $formData->getPreparedHeaders()->toArray();

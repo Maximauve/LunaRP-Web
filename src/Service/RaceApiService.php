@@ -18,7 +18,7 @@ class RaceApiService
 		return $this->apiUrl;
 	}
 
-	public function createRace(string $token, array $race): array
+	public function create(string $token, array $race): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -42,7 +42,7 @@ class RaceApiService
 		return $response->toArray();
 	}
 
-	public function getRace(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class RaceApiService
 		return $response->toArray();
 	}
 
-	public function getAllRace(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class RaceApiService
 		return $response->toArray();
 	}
 
-	public function UpdateRace(string $token, array $race)
+	public function update(string $token, array $race)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class RaceApiService
 		return $response->toArray();
 	}
 
-	public function deleteRace(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [

@@ -26,7 +26,7 @@ class CharacterController extends AbstractController
 			if ($request->query->get('id') == null) {
 				$one_character = null;
 			} else {
-				$one_character = $this->characterApiService->getCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+				$one_character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			}
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
@@ -64,7 +64,7 @@ class CharacterController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_character');
 			}
-			$this->characterApiService->deleteCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->characterApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
@@ -94,7 +94,7 @@ class CharacterController extends AbstractController
 			} elseif ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_character');
 			}
-			$character = $this->characterApiService->getCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {

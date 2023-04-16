@@ -18,7 +18,7 @@ class LanguageApiService
 		return $this->apiUrl;
 	}
 
-	public function createLanguage(string $token, array $language): array
+	public function create(string $token, array $language): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -42,7 +42,7 @@ class LanguageApiService
 		return $response->toArray();
 	}
 
-	public function getLanguage(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class LanguageApiService
 		return $response->toArray();
 	}
 
-	public function getAllLanguage(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class LanguageApiService
 		return $response->toArray();
 	}
 
-	public function UpdateLanguage(string $token, array $language)
+	public function update(string $token, array $language)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class LanguageApiService
 		return $response->toArray();
 	}
 
-	public function deleteLanguage(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [

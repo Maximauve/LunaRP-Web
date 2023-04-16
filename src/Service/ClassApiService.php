@@ -18,7 +18,7 @@ class ClassApiService
 		return $this->apiUrl;
 	}
 
-	public function createClass(string $token, array $class): array
+	public function create(string $token, array $class): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -42,7 +42,7 @@ class ClassApiService
 		return $response->toArray();
 	}
 
-	public function getClass(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class ClassApiService
 		return $response->toArray();
 	}
 
-	public function getAllClasse(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class ClassApiService
 		return $response->toArray();
 	}
 
-	public function UpdateClass(string $token, array $class)
+	public function update(string $token, array $class)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class ClassApiService
 		return $response->toArray();
 	}
 
-	public function deleteClass(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [
@@ -127,7 +127,7 @@ class ClassApiService
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {
-			
+
 			$json = $response->toArray(false);
 			if (gettype($json['message']) === 'array') {
 				throw new \Exception(implode("ERR", $json['message']));

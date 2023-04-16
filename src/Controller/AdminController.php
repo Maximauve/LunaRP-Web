@@ -53,7 +53,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->userApiService->getAllUser($request->getSession()->get('user')->getJwt());
+			$data = $this->userApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -90,7 +90,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_user');
 			}
-			$this->userApiService->deleteUser($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->userApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'User deleted'
@@ -122,7 +122,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->characterApiService->getAllCharacter($request->getSession()->get('user')->getJwt());
+			$data = $this->characterApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -154,7 +154,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_character');
 			}
-			$this->characterApiService->deleteCharacter($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->characterApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Character deleted'
@@ -186,7 +186,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->itemApiService->getAllItem($request->getSession()->get('user')->getJwt());
+			$data = $this->itemApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -223,7 +223,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_item');
 			}
-			$this->itemApiService->deleteItem($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->itemApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Item deleted'
@@ -255,7 +255,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->languageApiService->getAllLanguage($request->getSession()->get('user')->getJwt());
+			$data = $this->languageApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -292,7 +292,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_language');
 			}
-			$this->languageApiService->deleteLanguage($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->languageApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Language deleted'
@@ -324,7 +324,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->raceApiService->getAllRace($request->getSession()->get('user')->getJwt());
+			$data = $this->raceApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -361,7 +361,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_race');
 			}
-			$this->raceApiService->deleteRace($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->raceApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Race deleted'
@@ -394,7 +394,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->spellApiService->getAllSpell($request->getSession()->get('user')->getJwt());
+			$data = $this->spellApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -431,7 +431,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_spell');
 			}
-			$this->spellApiService->deleteSpell($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->spellApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Spell deleted'
@@ -463,7 +463,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->classApiService->getAllClasse($request->getSession()->get('user')->getJwt());
+			$data = $this->classApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -500,7 +500,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_classe');
 			}
-			$this->classApiService->deleteClass($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->classApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Classe deleted'
@@ -532,7 +532,7 @@ class AdminController extends AbstractController
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
 			}
-			$data = $this->campainApiService->getAllCampain($request->getSession()->get('user')->getJwt());
+			$data = $this->campainApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
 			$data = null;
 			$error = explode("ERR", $e->getMessage());
@@ -569,7 +569,7 @@ class AdminController extends AbstractController
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_campain');
 			}
-			$this->campainApiService->deleteCampain($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			$this->campainApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
 				'success',
 				'Campain deleted'

@@ -58,13 +58,14 @@ class LoginController extends AbstractController
 		$email = $data['email'];
 		$jwt = $data['token'];
 		$id = $data['id'];
+		$role = $data['role'];
 		if (isset($data["userId"]) && $data["userId"] != null) {
 			$img = $this->apiUrl . "/local-files/" . $data["userId"];
 		} else {
 			$img = null;
 		}
 
-		$user = new User($id, $username, $email, $jwt, $img);
+		$user = new User($id, $username, $email, $jwt, $role, $img);
 
 		$request->getSession()->set('user', $user);
 

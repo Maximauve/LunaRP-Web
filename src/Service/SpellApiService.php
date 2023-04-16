@@ -18,7 +18,7 @@ class SpellApiService
 		return $this->apiUrl;
 	}
 
-	public function createSpell(string $token, array $spell): array
+	public function create(string $token, array $spell): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
@@ -42,7 +42,7 @@ class SpellApiService
 		return $response->toArray();
 	}
 
-	public function getSpell(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
@@ -65,7 +65,7 @@ class SpellApiService
 		return $response->toArray();
 	}
 
-	public function getAllSpell(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
@@ -88,7 +88,7 @@ class SpellApiService
 		return $response->toArray();
 	}
 
-	public function UpdateSpell(string $token, array $spell)
+	public function update(string $token, array $spell)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
@@ -112,7 +112,7 @@ class SpellApiService
 		return $response->toArray();
 	}
 
-	public function deleteSpell(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [

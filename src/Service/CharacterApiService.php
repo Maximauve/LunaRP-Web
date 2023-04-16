@@ -18,13 +18,13 @@ class CharacterApiService
 		return $this->apiUrl;
 	}
 
-	public function createCharacter(string $token, array $character): array
+	public function create(string $token, array $character): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 			'json' => $character,
 		]);
@@ -42,13 +42,13 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function getCharacter(string $token, int $id): array
+	public function get(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 		]);
 
@@ -65,13 +65,13 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function getAllCharacter(string $token): array
+	public function getAll(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 		]);
 
@@ -88,13 +88,13 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function UpdateCharacter(string $token, array $character)
+	public function update(string $token, array $character)
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 			'json' => $character,
 		]);
@@ -112,13 +112,13 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function deleteCharacter(string $token, int $id): array
+	public function delete(string $token, int $id): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 			'json' => [
 				'id' => $id,
