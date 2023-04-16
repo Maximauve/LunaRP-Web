@@ -1,5 +1,54 @@
 {% extends 'admin.html.twig' %}
 
 {% block content %}
-
+    {% if all_spells is not null %}
+        {% if all_spells|length > 0 %}
+            <div class="relative overflow-x-auto sm:rounded-lg">
+                <table class="w-full text-sm text-left text-amber-500 dark:text-amber-400">
+                    <thead class="text-sm text-amber-700 uppercase bg-sky-50 dark:bg-sky-700 dark:text-amber-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-center">Nom</th>
+                            <th scope="col" class="px-6 py-3 text-center">Niveau</th>
+                            <th scope="col" class="px-6 py-3 text-center">Distance</th>
+                            <th scope="col" class="px-6 py-3 text-center">Composants</th>
+                            <th scope="col" class="px-6 py-3 text-center">Durée</th>
+                            <th scope="col" class="px-6 py-3 text-center">Temps d'incantation</th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for spell in all_spells %}
+                            <tr class="bg-white border-b text-center">
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.name }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.level }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.scope }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.component }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.duration }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ spell.casting_time }}</td>
+                                <td class="px-6 py-5"><img  src="{{ asset('images/bouton-modifier.png') }}" /></td>
+                                <td class="px-6 py-5">
+                                    <a href="{{ path('admin_delete_spell', {'id': spell.id}) }}">
+                                        <img src="{{ asset('images/supprimer.png') }}"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="flex justify-center items-center h-full no-found-info">
+                <div class="no-found text-lg px-6 py-5" role="alert">
+                    Aucun sorts trouvés
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        {% for flash in app.flashes('error')%}
+            <div class="alert alert-danger" role="alert">
+                {{ flash }}
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

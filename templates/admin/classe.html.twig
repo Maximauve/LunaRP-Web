@@ -1,5 +1,48 @@
 {% extends 'admin.html.twig' %}
 
 {% block content %}
-
+    {% if all_classes is not null %}
+        {% if all_classes|length > 0 %}
+            <div class="relative overflow-x-auto sm:rounded-lg">
+                <table class="w-full text-sm text-left text-amber-500 dark:text-amber-400">
+                    <thead class="text-sm text-amber-700 uppercase bg-sky-50 dark:bg-sky-700 dark:text-amber-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-center">Nom</th>
+                            <th scope="col" class="px-6 py-3 text-center">Dé de vie</th>
+                            <th scope="col" class="px-6 py-3 text-center">Description</th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for classe in all_classes %}
+                            <tr class="bg-white border-b text-center">
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ classe.name }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ classe.dice }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white description">{{ classe.description }}</td>
+                                <td class="px-6 py-5"><img  src="{{ asset('images/bouton-modifier.png') }}" /></td>
+                                <td class="px-6 py-5">
+                                    <a href="{{ path('admin_delete_classe', {'id': classe.id}) }}">
+                                        <img src="{{ asset('images/supprimer.png') }}"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="flex justify-center items-center h-full no-found-info">
+                <div class="no-found text-lg px-6 py-5" role="alert">
+                    Aucune classes trouvées
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        {% for flash in app.flashes('error')%}
+            <div class="alert alert-danger" role="alert">
+                {{ flash }}
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

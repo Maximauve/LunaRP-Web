@@ -16,11 +16,13 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
 class LoginController extends AbstractController
 {
-	private $userApiService;
+	private string $apiUrl;
+	private $userApi;
 
-	public function __construct(UserApiService $userApiService)
+	public function __construct(UserApiService $userApiService, string $apiUrl)
 	{
-		$this->userApiService = $userApiService;
+		$this->apiUrl = $apiUrl;
+		$this->userApi = $userApiService;
 	}
 
 	#[Route('/login', name: 'app_login', methods: ['GET'])]
@@ -43,7 +45,7 @@ class LoginController extends AbstractController
 		$password = $request->request->get('password');
 
 		try {
-			$data = $this->userApiService->login($email, $password);
+			$data = $this->userApi->login($email, $password);
 		} catch (\Exception $e) {
 			$this->addFlash('error', $e->getMessage());
 			return $this->render('login/index.html.twig', [
@@ -55,8 +57,14 @@ class LoginController extends AbstractController
 		$username = $data['username'];
 		$email = $data['email'];
 		$jwt = $data['token'];
+		$id = $data['id'];
+		if (isset($data["userId"]) && $data["userId"] != null) {
+			$img = $this->apiUrl . "/local-files/" . $data["userId"];
+		} else {
+			$img = null;
+		}
 
-		$user = new User($username, $email, $jwt);
+		$user = new User($id, $username, $email, $jwt, $img);
 
 		$request->getSession()->set('user', $user);
 

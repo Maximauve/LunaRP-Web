@@ -44,7 +44,7 @@
 					{% if app.session.get('user') %}
 						{% set user = app.session.get('user') %}
 						<div class="connected">
-							<a class="profile-pic" href="#"><img src="{{ asset('images/maPP.gif') }}" /></a>
+							<a class="profile-pic" href="{{path('app_profile')}}"><img src="{{ user.profilePicture ?? asset('images/default.jpg') }}" /></a>
 							<a class="logout-button" href="{{path('app_logout')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 						</div>
 					{% else %}

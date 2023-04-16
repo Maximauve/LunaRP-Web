@@ -24,9 +24,9 @@ class LanguageApiService
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $language,
+			'json' => $language,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -48,8 +48,8 @@ class LanguageApiService
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -65,14 +65,14 @@ class LanguageApiService
 		return $response->toArray();
 	}
 
-	public function getLanguages(string $token): array
+	public function getAllLanguage(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -94,9 +94,9 @@ class LanguageApiService
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $language,
+			'json' => $language,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -118,9 +118,9 @@ class LanguageApiService
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => [
+			'json' => [
 				'id' => $id,
 			],
 		]);

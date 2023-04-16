@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% set user = app.session.get('user') %}
+{% block title %}Profil - {{ user.username }}{% endblock %}
+
+{% block body %}
+
+<div class="user-container">
+	<div class="container-left">
+		<label for="avatar" class="hidden"><i class="fa-solid fa-file-image"></i></label>
+		<div id="img-holder" class="img-holder"></div>
+		<img src="{{ user.profilePicture ?? asset('images/default.jpg') }}" alt="Photo de profil" class="large-profile-pic" />
+		<button id="edit" type="button" onclick="editProfile()">Modifier le profil</button>
+		<button id="undo" type="button" class="undo hidden" onclick="window.location.reload()">Annuler les modifications</button>
+		<button id="save" type="submit" class="save hidden" form="editForm">Sauvegarder les modifications</button>
+	</div>
+	<div class="container-right">
+		<form action="{{path('app_profile_update')}}" id="editForm" method="post" enctype="multipart/form-data" oninput="verifyPassword()">
+			<label class="profile-label hidden" for="username">Nom d'utilisateur :</label>
+			<input class="profile-input" type="text" class="profile-input" id="username" name="username" value="{{ user.username }}" disabled>
+			<label class="profile-label hidden" for="email">Email :</label>
+			<input class="profile-input" type="email" class="profile-input" id="email" name="email" value="{{ user.email }}" disabled>
+			<label class="profile-label hidden" for="password">Mot de passe :</label>
+			<input class="profile-input hidden" type="password" id="password" name="password" disabled>
+			<label class="profile-label hidden" for="confirm-password">Confirmer le mot de passe :</label>
+			<input class="profile-input hidden" type="password" id="confirm-password" name="confirm-password" disabled>
+			<input class="profile-input" type="file" accept="image/*" id="avatar" name="avatar" onchange="imgUpload(event)" style="display:none;"/>
+		</form>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/updateProfile.js') }}"></script>
+{% endblock %}

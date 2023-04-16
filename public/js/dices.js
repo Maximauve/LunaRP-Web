@@ -31,7 +31,7 @@ throwButton.addEventListener('click', () => {
 diceArr.forEach((dice) => {
 	dice.addEventListener('click', () => {
 		if (dice.classList.contains('main-button')) {
-			drawer.classList.toggle('hidden');
+			drawer.classList.toggle('dice-hidden');
 		} else {
 			const mainDice = document.querySelector('.main-button');
 			mainDice.classList.remove('main-button');
@@ -39,7 +39,7 @@ diceArr.forEach((dice) => {
 			// drawer.removeChild(dice)
 			drawer.appendChild(mainDice)
 			dice.classList.add('main-button');
-			drawer.classList.add('hidden');
+			drawer.classList.add('dice-hidden');
 			sortDrawer();
 		}
 	});

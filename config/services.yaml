@@ -25,6 +25,31 @@ services:
   App\Service\CharacterApiService:
     arguments:
       $apiUrl: "%env(API_URL)%"
+  App\Controller\LoginController:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Controller\RegistrationController:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Controller\UserController:
+  App\Service\ItemApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\LanguageApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\RaceApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\SpellApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\ClassApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
+  App\Service\CampainApiService:
+    arguments:
+      $apiUrl: "%env(API_URL)%"
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

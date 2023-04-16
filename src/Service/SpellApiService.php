@@ -24,9 +24,9 @@ class SpellApiService
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $spell,
+			'json' => $spell,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -48,8 +48,8 @@ class SpellApiService
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -65,14 +65,14 @@ class SpellApiService
 		return $response->toArray();
 	}
 
-	public function getSpells(string $token): array
+	public function getAllSpell(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -94,9 +94,9 @@ class SpellApiService
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $spell,
+			'json' => $spell,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -118,9 +118,9 @@ class SpellApiService
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => [
+			'json' => [
 				'id' => $id,
 			],
 		]);
