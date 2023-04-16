@@ -7,15 +7,19 @@ use App\Service\UserApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-	private $userApiService;
+	private string $apiUrl;
+	private $userApi;
 
-	public function __construct(UserApiService $userApiService)
+	public function __construct(UserApiService $userApiService, string $apiUrl)
 	{
-		$this->userApiService = $userApiService;
+		$this->apiUrl = $apiUrl;
+		$this->userApi = $userApiService;
 	}
 
 	#[Route('/register', name: 'app_register', methods: ['GET'])]
@@ -32,10 +36,25 @@ class RegistrationController extends AbstractController
 		$email = $request->request->get('email');
 		$username = $request->request->get('username');
 		$password = $request->request->get('password');
+		$file = $request->files->get('avatar');
+		$form = [
+			'email' => $email,
+			'username' => $username,
+			'password' => $password,
+			'file' => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType()),
+		];
+		$formData = new FormDataPart($form);
 
 		try {
-			$data = $this->userApiService->register($username, $email, $password);
+			$data = $this->userApi->register($formData);
 		} catch (\Exception $e) {
+			// $err = explode("kwak", $e->getMessage());
+			// foreach ($err as $error) {
+			// 	$this->addFlash(
+			// 		'error',
+			// 		$error
+			// 	);
+			// }
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
 				$this->addFlash(
@@ -58,8 +77,9 @@ class RegistrationController extends AbstractController
 		// Store the JWT in local storage
 		$username = $data['username'];
 		$email = $data['email'];
+		$id = $data['id'];
 		try {
-			$data = $this->userApiService->login($email, $password);
+			$data = $this->userApi->login($email, $password);
 		} catch (\Exception $e) {
 			$this->addFlash(
 				'error',
@@ -70,10 +90,16 @@ class RegistrationController extends AbstractController
 			]);
 		}
 		$jwt = $data['token'];
+		if (isset($data["userId"]) && $data["userId"] != null) {
+			$img = $this->apiUrl . "/local-files/" . $data["userId"];
+		} else {
+			$img = null;
+		}
 
-		$user = new User($username, $email, $jwt);
+		$user = new User($id, $username, $email, $jwt, $img);
 
 		$request->getSession()->set('user', $user);
+
 
 		// Redirect to homepage or another page
 		return $this->redirectToRoute('app_home');

@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
 
+	private $id;
+
 	private $username;
 
 	private $email;
@@ -15,16 +17,37 @@ class User implements UserInterface
 
 	private $jwt;
 
+	private $profilePicture;
+
 	/**
 	 * @var string The hashed password
 	 */
 	private $password;
 
-	public function __construct(string $username, string $email, string $jwt)
+	public function __construct(int $id, string $username, string $email, string $jwt, ?string $profile_picture)
 	{
+		$this->id = $id;
 		$this->username = $username;
 		$this->email = $email;
 		$this->jwt = $jwt;
+		$this->profilePicture = $profile_picture;
+	}
+
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
+
+	public function getProfilePicture(): ?string
+	{
+		return $this->profilePicture;
+	}
+
+	public function setProfilePicture(string $profile_picture): self
+	{
+		$this->profilePicture = $profile_picture;
+
+		return $this;
 	}
 
 	public function getJwt(): ?string

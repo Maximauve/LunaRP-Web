@@ -71,6 +71,61 @@ form {
 // 	display: none;
 // }
 
+.delete-img {
+	position: absolute;
+	align-self: flex-end;
+	margin-left: 13vw;
+	background-color: $luna-dark;
+	color: $luna-accent;
+	border-radius: 100px;
+	border: 1px solid $luna-accent;
+	width: 2vw;
+	cursor: pointer;
+}
+
+.file-name {
+	position: absolute;
+	width: max-content;
+	max-width: 15vw;
+	margin-top: -1vh;
+	background-color: $luna-dark;
+	color: $luna-white;
+	border-radius: 100px;
+	border: 1px solid $luna-accent;
+	padding-left: 1vw;
+	padding-right: 1vw;
+}
+
+.img-preview {
+	height: 15vw;
+	width: 15vw;
+	border-radius: 15px;
+	object-fit: cover;
+}
+
+.img-holder {
+	margin-top: 2vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+label {
+	background-color: $luna-dark;
+	color: $luna-light;
+	border-radius: 100px;
+	height: 4vh;
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+input[type=file] {
+	display: none;
+}
+
 input {
 	border-radius: 100px;
 	background-color: $luna-dark;

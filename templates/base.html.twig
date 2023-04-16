@@ -44,7 +44,7 @@
 					{% if app.session.get('user') %}
 						{% set user = app.session.get('user') %}
 						<div class="connected">
-							<a class="profile-pic" href="#"><img src="{{ asset('images/maPP.gif') }}" /></a>
+							<a class="profile-pic" href="{{path('app_profile')}}"><img src="{{ user.profilePicture ?? asset('images/default.jpg') }}" /></a>
 							<a class="logout-button" href="{{path('app_logout')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 						</div>
 					{% else %}
@@ -60,7 +60,7 @@
 				<button class="main-button" id="dice-20">
 					<img src="https://rollthedice.online/assets/images/dice/1x1/d20_dice_1x1.png" />
 				</button>
-				<div class="select-dice hidden" id="dice-drawer">
+				<div class="select-dice dice-hidden" id="dice-drawer">
 					<button id="dice-100"><img src="https://rollthedice.online/assets/images/dice/1x1/d100_dice_1x1.png"/></button>
 					<button id="dice-12"><img src="https://rollthedice.online/assets/images/dice/1x1/d12_dice_1x1.png"/></button>
 					<button id="dice-10"><img src="https://rollthedice.online/assets/images/dice/1x1/d10_dice_1x1.png"/></button>

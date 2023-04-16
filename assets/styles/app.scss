@@ -19,6 +19,10 @@ body {
 	width: 100vw;
 }
 
+.hidden {
+	display: none !important;
+}
+
 nav {
 	color: $luna-white;
 	display: flex;
@@ -93,6 +97,8 @@ nav {
 
 			img {
 				width: 4vw;
+				height: 4vw;
+				object-fit: cover;
 				border-radius: 100px;
 			}
 		}
@@ -182,8 +188,8 @@ nav {
 	}
 }
 
-.hidden {
-	display: none;
+.dice-hidden {
+	display: none !important;
 }
 
 
@@ -452,6 +458,161 @@ nav {
 		.description {
 			color: $luna-white;
 			font-size: normal;
+		}
+	}
+}
+
+/*
+	o==============o
+	* PAGE PROFILE *
+	o==============o
+*/
+
+.user-container {
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	.container-left {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		width: 11vw;
+		border-radius: 25px;
+		height: fit-content;
+
+		.delete-img {
+			position: absolute;
+			align-self: flex-end;
+			margin-left: 9vw;
+			margin-top: 9.4vw;
+			background-color: $luna-dark;
+			color: $luna-accent;
+			border-radius: 15px 0 0 0;
+			border: 1px solid $luna-accent;
+			width: 2vw;
+			cursor: pointer;
+		}
+
+		.file-name {
+			position: absolute;
+			width: max-content;
+			max-width: 11vw;
+			margin-top: -1vh;
+			background-color: $luna-dark;
+			color: $luna-white;
+			border-radius: 100px;
+			border: 1px solid $luna-accent;
+			padding-left: 1vw;
+			padding-right: 1vw;
+		}
+
+		.img-holder {
+			width: 11vw;
+			height: 11vw;
+			position: absolute;
+			z-index: 1;
+			display: flex;
+			justify-content: center;
+		}
+
+		img {
+			width: 11vw;
+			height: 11vw;
+			object-fit: cover;
+			border-radius: 25px 25px 0 0;
+		}
+
+		label {
+			z-index: 2;
+			cursor: pointer;
+			font-size: 3rem;
+			border-radius: 25px 25px 0 0;
+			color: $luna-accent;
+			background-color: rgba($luna-white, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			width: 11vw;
+			height: 11vw;
+		}
+
+		button {
+			width: 100%;
+			height: 2rem;
+			border-radius: 0 0 25px 25px;
+			background-color: $luna-accent;
+			color: $luna;
+			font-weight: bold;
+			min-height: fit-content;
+
+			&.undo {
+				background-color: $luna-error;
+				border-radius: 0;
+				color: $luna-white;
+			}
+
+			&.save {
+				background-color: $luna-success;
+				color: $luna-white;
+				height: fit-content;
+
+				&:disabled {
+					background-color: grey;
+				}
+			}
+		}
+	}
+
+	.container-right {
+		width: 70%;
+
+		form {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+
+			label {
+				color: $luna-white;
+				font-weight: bold;
+				font-size: x-large;
+				margin-top: 2rem;
+
+				&[for="username"] {
+					margin-top: 0.5rem;
+				}
+			}
+
+			input {
+				margin-top: 0.5rem;
+				width: 100%;
+				height: 3rem;
+				border-radius: 25px;
+				background-color: $luna;
+				color: $luna-white;
+				font-weight: bold;
+				padding-left: 1rem;
+
+				&:disabled {
+					margin-top: 2rem;
+					background-color: transparent;
+				}
+
+				&#username {
+					margin-top: 0.5rem;
+					font-size: xx-large;
+					color: $luna-accent;
+				}
+
+				&#confirm-password {
+					margin-bottom: 1rem;
+				}
+			}
 		}
 	}
 }
