@@ -24,9 +24,9 @@ class CharacterApiService
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $character,
+			'json' => $character,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -48,8 +48,8 @@ class CharacterApiService
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -65,14 +65,14 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function getCharacters(string $token): array
+	public function getAllCharacter(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -94,9 +94,9 @@ class CharacterApiService
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $character,
+			'json' => $character,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -118,10 +118,33 @@ class CharacterApiService
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => [
+			'json' => [
 				'id' => $id,
+			],
+		]);
+
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 201) {
+			$json = $response->toArray(false);
+			if (gettype($json['message']) === 'array') {
+				throw new \Exception(implode("ERR", $json['message']));
+			} else {
+				throw new \Exception($json['message']);
+			}
+		}
+
+		return $response->toArray();
+	}
+
+	public function getCharacterMe(string $token): array
+	{
+		$client = HttpClient::create();
+		$response = $client->request('GET', $this->apiUrl . "me", [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
 		]);
 

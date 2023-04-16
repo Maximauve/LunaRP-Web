@@ -67,10 +67,56 @@ class UserApiService
 		return $response->toArray();
 	}
 
-	public function getUser(int $id): array
+	public function getUser(string $token, int $id): array
 	{
 		$client = HttpClient::create();
-		$response = $client->request('GET', $this->apiUrl . $id);
+		$response = $client->request('GET', $this->apiUrl . $id, [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
+			],
+		]);
+
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 200) {
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
+		}
+
+		return $response->toArray();
+	}
+
+	public function getAllUser(string $token): array
+	{
+		$client = HttpClient::create();
+		$response = $client->request('GET', $this->apiUrl, [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
+			],
+		]);
+
+		$statusCode = $response->getStatusCode();
+		if ($statusCode !== 200) {
+			$json = $response->toArray(false);
+			throw new \Exception($json['message'][0]);
+		}
+
+		return $response->toArray();
+	}
+
+	public function deleteUser(string $token, int $id): array
+	{
+		$client = HttpClient::create();
+		$response = $client->request('POST', $this->apiUrl . 'delete', [
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
+			],
+			'json' => [
+				'id' => $id,
+			],
+		]);
 
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {

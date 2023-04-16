@@ -11,9 +11,9 @@ $luna-accent : #FAA816;
 $luna-error: #922727;
 
 body {
-	background-color: $luna-darker;
-	color: $luna-white;
-	font-family: 'Roboto', sans-serif;
+	background: linear-gradient(rgba(#021046, 0.8), rgba(#021046, 0.8)), url(/public/images/bg-main.jpg);
+	background-size: 100vw 100vh;
+	color: $luna-light;
 }
 
 .container {
@@ -63,10 +63,59 @@ body {
     }
 
     .right-side {
-        background-color: $luna-dark;
         width: 80%;
         height: 80vh;
         margin-right: 5%;
         border-radius: 1rem;
+
+        .icon {
+            width: 30px;
+        }
+
+        div > table > tbody > tr{
+            background-color: $luna-dark;
+            border-color: $luna-dark;
+            
+            .description {
+                text-overflow: ellipsis;
+            }
+
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        div > table > thead > tr {
+            background-color: $luna;
+            border-color: $luna;
+        }
+        
+        .no-found-info {
+
+            animation: slide 3s ease-in-out infinite;
+
+            .no-found {
+                background-color: $luna-dark;
+                width: fit-content;
+                border-radius: 1rem;
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: $luna-white;
+            }
+        }
+    }
+}
+
+@keyframes slide {
+    0% {
+        transform: translatey(-40px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-40px);
     }
 }

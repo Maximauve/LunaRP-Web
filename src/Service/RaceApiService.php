@@ -24,9 +24,9 @@ class RaceApiService
 		$response = $client->request('POST', $this->apiUrl . 'create', [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $race,
+			'json' => $race,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -48,8 +48,8 @@ class RaceApiService
 		$response = $client->request('GET', $this->apiUrl . $id, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -65,14 +65,14 @@ class RaceApiService
 		return $response->toArray();
 	}
 
-	public function getRaces(string $token): array
+	public function getAllRace(string $token): array
 	{
 		$client = HttpClient::create();
 		$response = $client->request('GET', $this->apiUrl, [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -94,9 +94,9 @@ class RaceApiService
 		$response = $client->request('POST', $this->apiUrl . "update", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => $race,
+			'json' => $race,
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -118,9 +118,9 @@ class RaceApiService
 		$response = $client->request('POST', $this->apiUrl . "delete", [
 			'headers' => [
 				'Content-Type' => 'application/json',
+				'Authorization' => 'Bearer ' . $token,
 			],
-			'Authorization' => 'Bearer ' . $token,
-			'body' => [
+			'json' => [
 				'id' => $id,
 			],
 		]);
@@ -128,6 +128,8 @@ class RaceApiService
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {
 			$json = $response->toArray(false);
+			var_dump($json);
+			var_dump($statusCode);
 			if (gettype($json['message']) === 'array') {
 				throw new \Exception(implode("ERR", $json['message']));
 			} else {
