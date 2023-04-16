@@ -96,9 +96,8 @@ nav {
 			padding-top: 1vh;
 
 			img {
-				width: 4vw;
-				height: 4vw;
-				object-fit: cover;
+
+				width: 50px;
 				border-radius: 100px;
 			}
 		}
@@ -116,8 +115,8 @@ nav {
 
 .dices {
 	position: fixed;
-	bottom: 2vh;
-	right: 2vw;
+	bottom: 15px;
+	right: 30px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -125,20 +124,20 @@ nav {
 
 .throw {
 	position: absolute;
-	bottom: 2vh;
-	right: 5vw;
-	padding: 0px;
-	font-size: 2.65vh;
+	bottom: 17px;
+	right: 87px;
+	padding: 5px;
+	font-size: 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 8vw;
-	height: 5.5vh;
+	width: 150px;
+	height: 50px;
 	margin-bottom: 0.5em;
 	background-color: $luna-dark;
 	color: $luna-light;
 	border-radius: 100px 0px 0px 100px;
-	border: 0.3vh solid $luna-accent;
+	border: 2px solid $luna-accent;
 	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 }
 
@@ -146,46 +145,51 @@ nav {
 	position: absolute;
 	bottom: inherit;
 	right: inherit;
-	width: 8.2vh;
-	height: 8.2vh;
+	width: 70px;
+	height: 70px;
 	display: flex;
 	border-radius: 100px;
 	align-items: center;
 	justify-content: center;
 	background-color: $luna;
-	border: 0.3vh solid $luna-accent;
+	border: 2px solid $luna-accent;
 	box-shadow: 1.5vh 7vh 7vh rgba(0, 0, 0, 0.2);
 
 	img {
 		width: 75%;
+		color: $luna-white;
 	}
 }
 
 .select-dice {
 	position: absolute;
-	bottom: 11vh;
+	bottom: 85px;
 	right: inherit;
 	padding: 0px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 3.7vw;
+	width: 50px;
 	margin-bottom: 1vw;
 	color: $luna-light;
 
 	button {
 		margin-top: 1vh;
+		img {
+			display: inline;
+			margin: 0px;
+			width: 50px;
+			height: 50px;
+			padding:5px;
+			background-color: $luna-dark;
+			color:$luna-white;
+			border-radius: 100px;
+			box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
+		}
 	}
 
-	img {
-		display: inline;
-		margin: 0px;
-		width: 75%;
-		background-color: $luna-dark;
-		border-radius: 100px;
-		box-shadow: 0.3vh 0.3vh 0.3vh 0.2vh rgba(0, 0, 0, 0.2);
-	}
+	
 }
 
 .dice-hidden {
