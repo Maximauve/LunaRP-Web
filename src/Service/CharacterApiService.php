@@ -88,15 +88,14 @@ class CharacterApiService
 		return $response->toArray();
 	}
 
-	public function update(string $token, array $character)
+	public function update(string $token, FormDataPart $character)
 	{
 		$client = HttpClient::create();
-		$response = $client->request('POST', $this->apiUrl . "update", [
-			'headers' => [
-				'Content-Type' => 'application/json',
-				'Authorization' => 'Bearer ' . $token,
-			],
-			'json' => $character,
+		$headers = $character->getPreparedHeaders()->toArray();
+		$headers[] = 'Authorization: Bearer ' . $token;
+		$response = $client->request('POST', $this->apiUrl . 'create', [
+			'headers' => $headers,
+			'body' => $character->bodyToIterable(),
 		]);
 
 		$statusCode = $response->getStatusCode();
@@ -141,6 +140,8 @@ class CharacterApiService
 	public function getCharacterMe(string $token): array
 	{
 		$client = HttpClient::create();
+		$headers = $character->getPreparedHeaders()->toArray();
+		$headers[] = 'Authorization: Bearer ' . $token;
 		$response = $client->request('GET', $this->apiUrl . "me", [
 			'headers' => [
 				'Content-Type' => 'application/json',

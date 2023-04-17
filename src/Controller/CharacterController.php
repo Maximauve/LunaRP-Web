@@ -228,7 +228,13 @@ class CharacterController extends AbstractController
 		$charisme = $request->request->get('charisme');
 		$file = $request->files->get('avatar');
 		$items = array_keys($request->request->all('item'));
+		if ($items == null) {
+			$items = [];
+		}
 		$spells = array_keys($request->request->all('spell'));
+		if ($spells == null) {
+			$spells = [];
+		}
 		$form = [
 			'name' => $name,
 			'race' => $race,
@@ -293,7 +299,20 @@ class CharacterController extends AbstractController
 				}
 			}
 			$one_character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
-			dump($one_character);
+			if ($one_character["characterId"] !== null) {
+				$one_character["img"] = $this->localfileApiService->getImage($one_character["characterId"]);
+			} else {
+				$one_character["img"] = null;
+			}
+			foreach ($one_character["inventory"] as $i => $item) {
+				if ($item["item"]["itemId"] != null) {
+					$item["item"]["img"] = $this->localfileApiService->getImage($item["item"]["itemId"]);
+					$one_character["inventory"][$i] = $item;
+				} else {
+					$item["item"]["img"] = null;
+					$one_character["inventory"][$i] = $item;
+				}
+			}
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
 			if (count($error) == 1) {
@@ -328,7 +347,7 @@ class CharacterController extends AbstractController
 	#[Route('/character/editCharacter', name: 'app_character_editCharacter', methods: ['POST'])]
 	public function editCharacterPost(Request $request): Response
 	{
-
+		$id = $request->request->get('id');
 		$name = $request->request->get('name');
 		$race = $request->request->get('race');
 		$classe = $request->request->get('classe');
@@ -342,10 +361,10 @@ class CharacterController extends AbstractController
 		$intelligence = $request->request->get('intelligence');
 		$sagesse = $request->request->get('sagesse');
 		$charisme = $request->request->get('charisme');
-		$file = $request->files->get('avatar');
 		$items = array_keys($request->request->all('item'));
 		$spells = array_keys($request->request->all('spell'));
 		$form = [
+			'id' => $id,
 			'name' => $name,
 			'race' => $race,
 			'classe' => $classe,
@@ -361,11 +380,14 @@ class CharacterController extends AbstractController
 			'charisma' => $charisme,
 			'inventory' => $items,
 			'spells' => $spells,
-			'file' => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType()),
 		];
+		$file = $request->files->get('avatar');
+		if ($file != null) {
+			$form["file"] = DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType());
+		}
 		$formData = new FormDataPart($form);
 		try {
-			$this->characterApiService->create($request->getSession()->get('user')->getJwt(), $formData);
+			$this->characterApiService->update($request->getSession()->get('user')->getJwt(), $formData);
 			return $this->redirectToRoute('app_character');
 		} catch (\Exception $e) {
 			$error = explode("ERR", $e->getMessage());
@@ -382,7 +404,7 @@ class CharacterController extends AbstractController
 					);
 				}
 			}
-			return $this->redirectToRoute('app_character_create');
+			return $this->redirectToRoute('app_character_edit', ['id' => $request->request->get('id')]);
 		}
 	}
 }
