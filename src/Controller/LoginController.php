@@ -64,6 +64,7 @@ class LoginController extends AbstractController
 		} else {
 			$img = null;
 		}
+		dump($data);
 
 		$user = new User($id, $username, $email, $jwt, $role, $img);
 

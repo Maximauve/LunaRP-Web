@@ -1072,6 +1072,16 @@ nav {
 					color: $luna-accent;
 					opacity: 1;
 				}
+
+				&::-webkit-scrollbar {
+					background-color: $luna;
+					width: 10px;
+				}
+	
+				&::-webkit-scrollbar-thumb {
+					background-color: $luna-dark;
+					border-radius: 15px;
+				}
 			}
 
 			.character-pp {

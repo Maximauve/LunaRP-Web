@@ -7,7 +7,7 @@
     <div class="home-container">
         <div class="charac-container">
             <div class="charac-infos">
-                <input type="text" name="name" placeholder="Nom du personnage">
+                <input type="text" name="name" placeholder="{{ one_character.name }}">
                 <select id="race" name="race">
                     <option value="" disabled selected>Recherche...</option>
                     {% for race in all_races %}

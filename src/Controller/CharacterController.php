@@ -269,4 +269,120 @@ class CharacterController extends AbstractController
 			return $this->redirectToRoute('app_character_create');
 		}
 	}
+
+	#[Route('/character/edit', name: 'app_character_edit', methods: ['GET'])]
+	public function editCharacter(Request $request): Response
+	{
+		try {
+			if ($request->getSession()->get('user') == null) {
+				return $this->redirectToRoute('app_login');
+			} else if ($request->query->get('id') == null) {
+				return $this->redirectToRoute('app_character');
+			}
+			$races = $this->raceApiService->getAll($request->getSession()->get('user')->getJwt());
+			$classes = $this->classApiService->getAll($request->getSession()->get('user')->getJwt());
+			$items = $this->itemApiService->getAll($request->getSession()->get('user')->getJwt());
+			$spells = $this->spellApiService->getAll($request->getSession()->get('user')->getJwt());
+			foreach ($items as $i => $item) {
+				if ($item["itemId"] != null) {
+					$item["img"] = $this->localfileApiService->getImage($item["itemId"]);
+					$items[$i] = $item;
+				} else {
+					$item["img"] = null;
+					$items[$i] = $item;
+				}
+			}
+			$one_character = $this->characterApiService->get($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
+			dump($one_character);
+		} catch (\Exception $e) {
+			$error = explode("ERR", $e->getMessage());
+			if (count($error) == 1) {
+				$this->addFlash(
+					'error',
+					$error[0]
+				);
+			} else {
+				foreach ($error as $err) {
+					$this->addFlash(
+						'error',
+						$err
+					);
+				}
+			}
+			return $this->render('character/edit.html.twig', [
+				'all_races' => array(),
+				'all_classes' => array(),
+				'all_items' => array(),
+				'all_spells' => array(),
+			]);
+		}
+		return $this->render('character/edit.html.twig', [
+			"all_races" => $races,
+			"all_classes" => $classes,
+			"all_items" => $items,
+			"all_spells" => $spells,
+			"one_character" => $one_character,
+		]);
+	}
+
+	#[Route('/character/editCharacter', name: 'app_character_editCharacter', methods: ['POST'])]
+	public function editCharacterPost(Request $request): Response
+	{
+
+		$name = $request->request->get('name');
+		$race = $request->request->get('race');
+		$classe = $request->request->get('classe');
+		$alignment = $request->request->get('alignment');
+		$description = $request->request->get('description');
+		$level = $request->request->get('niveau');
+		$experience = $request->request->get('experience');
+		$force = $request->request->get('force');
+		$dexterite = $request->request->get('dexterite');
+		$constitution = $request->request->get('constitution');
+		$intelligence = $request->request->get('intelligence');
+		$sagesse = $request->request->get('sagesse');
+		$charisme = $request->request->get('charisme');
+		$file = $request->files->get('avatar');
+		$items = array_keys($request->request->all('item'));
+		$spells = array_keys($request->request->all('spell'));
+		$form = [
+			'name' => $name,
+			'race' => $race,
+			'classe' => $classe,
+			'alignment' => $alignment,
+			'description' => $description,
+			'level' => $level,
+			'experience' => $experience,
+			'strength' => $force,
+			'dexterity' => $dexterite,
+			'constitution' => $constitution,
+			'intelligence' => $intelligence,
+			'wisdom' => $sagesse,
+			'charisma' => $charisme,
+			'inventory' => $items,
+			'spells' => $spells,
+			'file' => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType()),
+		];
+		$formData = new FormDataPart($form);
+		try {
+			$this->characterApiService->create($request->getSession()->get('user')->getJwt(), $formData);
+			return $this->redirectToRoute('app_character');
+		} catch (\Exception $e) {
+			$error = explode("ERR", $e->getMessage());
+			if (count($error) == 1) {
+				$this->addFlash(
+					'error',
+					$error[0]
+				);
+			} else {
+				foreach ($error as $err) {
+					$this->addFlash(
+						'error',
+						$err
+					);
+				}
+			}
+			return $this->redirectToRoute('app_character_create');
+		}
+	}
 }

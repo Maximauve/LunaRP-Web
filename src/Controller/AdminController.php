@@ -39,11 +39,14 @@ class AdminController extends AbstractController
 	}
 
 	#[Route('/admin', name: 'app_admin_dashboard', methods: ['GET'])]
-	public function index(): Response
+	public function index(Request $request): Response
 	{
-		return $this->render('admin/index.html.twig', [
-			'controller_name' => 'AdminController',
-		]);
+		if ($request->getSession()->get('user') == null) {
+			return $this->redirectToRoute('app_login');
+		} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+			return $this->redirectToRoute('app_home');
+		}
+		return $this->redirectToRoute('app_admin_user');
 	}
 
 	#[Route('/admin/users', name: 'app_admin_user', methods: ['GET'])]
@@ -52,6 +55,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->userApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -89,6 +94,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_user');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->userApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -121,6 +128,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->characterApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -153,6 +162,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_character');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->characterApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -185,6 +196,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->itemApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -222,6 +235,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_item');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->itemApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -254,6 +269,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->languageApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -291,6 +308,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_language');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->languageApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -323,6 +342,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->raceApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -360,6 +381,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_race');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->raceApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -393,6 +416,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->spellApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -430,6 +455,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_spell');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->spellApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -462,6 +489,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->classApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -499,6 +528,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_classe');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->classApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
@@ -531,6 +562,8 @@ class AdminController extends AbstractController
 		try {
 			if ($request->getSession()->get('user') == null) {
 				return $this->redirectToRoute('app_login');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$data = $this->campainApiService->getAll($request->getSession()->get('user')->getJwt());
 		} catch (\Exception $e) {
@@ -568,6 +601,8 @@ class AdminController extends AbstractController
 				return $this->redirectToRoute('app_login');
 			} else if ($request->query->get('id') == null) {
 				return $this->redirectToRoute('app_admin_campain');
+			} else if ($request->getSession()->get('user')->getRole() != "Admin") {
+				return $this->redirectToRoute('app_home');
 			}
 			$this->campainApiService->delete($request->getSession()->get('user')->getJwt(), $request->query->get('id'));
 			$this->addFlash(
