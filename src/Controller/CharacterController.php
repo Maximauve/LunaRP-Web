@@ -229,11 +229,11 @@ class CharacterController extends AbstractController
 		$file = $request->files->get('avatar');
 		$items = array_keys($request->request->all('item'));
 		if ($items == null) {
-			$items = array();
+			$items = [];
 		}
 		$spells = array_keys($request->request->all('spell'));
 		if ($spells == null) {
-			$spells = array();
+			$spells = [];
 		}
 		$form = [
 			'name' => $name,
