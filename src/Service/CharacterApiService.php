@@ -140,8 +140,6 @@ class CharacterApiService
 	public function getCharacterMe(string $token): array
 	{
 		$client = HttpClient::create();
-		$headers = $character->getPreparedHeaders()->toArray();
-		$headers[] = 'Authorization: Bearer ' . $token;
 		$response = $client->request('GET', $this->apiUrl . "me", [
 			'headers' => [
 				'Content-Type' => 'application/json',

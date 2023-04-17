@@ -24,11 +24,9 @@ class HomeController extends AbstractController
 			return $this->redirectToRoute('app_login');
 		}
 		try {
-			if ($request->getSession()->get('user') == null) {
-				return $this->redirectToRoute('app_login');
-			}
 			$data = $this->characterApiService->getCharacterMe($request->getSession()->get('user')->getJwt());
-			foreach ($data as $i => $character) {
+			foreach ($data as $i=>$character) {
+				dump($character);
 				if ($character["characterId"] !== null) {
 					$img = $this->localfileApiService->getImage($character["characterId"]);
 					$data[$i]["img"] = $img;
