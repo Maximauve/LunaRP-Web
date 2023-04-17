@@ -380,7 +380,7 @@ nav {
 		}
 
 		ul {
-			width: 80%;
+			width: 90%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -419,24 +419,27 @@ nav {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				color: $luna-accent;
+				color: #FAA816;
 				font-weight: bold;
 				font-size: large;
 				border-radius: 15px;
-				background-color: $luna-dark;
-				padding-top: 1.5vh;
-				padding-bottom: 1.5vh;
-				width: 90%;
-				height: 6vh;
-				text-align: center;
-				margin-top: 1vh;
+				background-color: #03217D;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				width: 100%;
+				height: 60px;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				margin-left: 10px;
+				margin-right: 10px;
 
 				img {
-					height: 55px;
-					width: 55px;
+					height: 60px;
+					width: 60px;
+					-o-object-fit: cover;
 					object-fit: cover;
 					border-radius: 15px 0 0 15px;
-					margin-right: 2%;
+					margin-right: 10px;
 				}
 
 				div {
@@ -444,7 +447,10 @@ nav {
 					flex-direction: column;
 					align-items: flex-start;
 					justify-content: center;
-					width: 100%;
+					overflow: hidden;
+                	text-overflow: ellipsis;
+                	white-space: nowrap;
+                	width: 80%;
 
 					.name {
 						color: $luna-accent;
@@ -459,14 +465,17 @@ nav {
 		}
 
 		.add {
-			width: 80%;
-			background-color: $luna-accent;
-			color: $luna-white;
-			height: 6vh;
-			padding: 10px;
+			width: 90%;
+			background-color: #FAA816;
+			color: #FFF4DF;
+			height: 50px;
+			padding-bottom: 10px;
 			border-radius: 0px 0px 15px 15px;
 			text-align: center;
 			cursor: pointer;
+			border: solid $luna 5px;
+			font-weight: bolder;
+			font-size: 25px;
 		}
 	}
 }
