@@ -365,6 +365,15 @@ nav {
 		justify-content: flex-start;
 		height: 80%;
 
+		&.second {
+			ul {
+				i {
+					color: $luna-accent;
+					font-size: 10rem;
+				}
+			}
+		}
+
 
 		.title {
 			color: $luna-accent;
@@ -448,9 +457,9 @@ nav {
 					align-items: flex-start;
 					justify-content: center;
 					overflow: hidden;
-                	text-overflow: ellipsis;
-                	white-space: nowrap;
-                	width: 80%;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					width: 80%;
 
 					.name {
 						color: $luna-accent;
@@ -978,7 +987,7 @@ nav {
 						color: $luna-accent;
 					}
 
-					
+
 				}
 			}
 
@@ -1104,7 +1113,7 @@ nav {
 					background-color: $luna;
 					width: 10px;
 				}
-	
+
 				&::-webkit-scrollbar-thumb {
 					background-color: $luna-dark;
 					border-radius: 15px;
@@ -1242,7 +1251,7 @@ nav {
 				input {
 					flex: 1 1 30%;
 					margin: 10px;
-					
+
 				}
 			}
 		}
@@ -1526,7 +1535,7 @@ nav {
 
 			filter: drop-shadow(5px 10px 5px rgba(0, 0, 0, 0.3));
 
-			a{
+			a {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
