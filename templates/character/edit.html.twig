@@ -3,7 +3,7 @@
 {% block title %}LunaRP{% endblock %}
 
 {% block body %}
-<form action="{{ path( 'app_character_editCharacter' )}}" method="post" id="editCharacter" enctype="multipart/form-data">
+<form action="{{ path( 'app_character_editCharacter' )}}" method="post" id="createCharacter" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{ one_character.id }}"/>
     <div class="home-container">
         <div class="charac-container">
