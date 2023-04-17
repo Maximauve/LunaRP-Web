@@ -93,7 +93,7 @@ class CharacterApiService
 		$client = HttpClient::create();
 		$headers = $character->getPreparedHeaders()->toArray();
 		$headers[] = 'Authorization: Bearer ' . $token;
-		$response = $client->request('POST', $this->apiUrl . 'create', [
+		$response = $client->request('POST', $this->apiUrl . 'update', [
 			'headers' => $headers,
 			'body' => $character->bodyToIterable(),
 		]);

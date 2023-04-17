@@ -128,8 +128,6 @@ class RaceApiService
 		$statusCode = $response->getStatusCode();
 		if ($statusCode !== 200) {
 			$json = $response->toArray(false);
-			var_dump($json);
-			var_dump($statusCode);
 			if (gettype($json['message']) === 'array') {
 				throw new \Exception(implode("ERR", $json['message']));
 			} else {

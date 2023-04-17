@@ -226,15 +226,6 @@ class CharacterController extends AbstractController
 		$intelligence = $request->request->get('intelligence');
 		$sagesse = $request->request->get('sagesse');
 		$charisme = $request->request->get('charisme');
-		$file = $request->files->get('avatar');
-		$items = array_keys($request->request->all('item'));
-		if ($items == null) {
-			$items = [];
-		}
-		$spells = array_keys($request->request->all('spell'));
-		if ($spells == null) {
-			$spells = [];
-		}
 		$form = [
 			'name' => $name,
 			'race' => $race,
@@ -249,10 +240,20 @@ class CharacterController extends AbstractController
 			'intelligence' => $intelligence,
 			'wisdom' => $sagesse,
 			'charisma' => $charisme,
-			'inventory' => $items,
-			'spells' => $spells,
-			'file' => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType()),
 		];
+		$file = $request->files->get('avatar');
+		if ($file != null) {
+			$form["file"] = DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType());
+		}
+		$items = array_keys($request->request->all('item'));
+		if ($items != []) {
+			$form["items"] = $items;
+		}
+		$spells = array_keys($request->request->all('spell'));
+		if ($spells != []) {
+			$form["spells"] = $spells;
+		}
+
 		$formData = new FormDataPart($form);
 		try {
 			$this->characterApiService->create($request->getSession()->get('user')->getJwt(), $formData);
@@ -378,7 +379,7 @@ class CharacterController extends AbstractController
 			'intelligence' => $intelligence,
 			'wisdom' => $sagesse,
 			'charisma' => $charisme,
-			'inventory' => $items,
+			'items' => $items,
 			'spells' => $spells,
 		];
 		$file = $request->files->get('avatar');
