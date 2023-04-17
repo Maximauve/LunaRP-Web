@@ -108,6 +108,13 @@ body {
     }
 }
 
+.crop {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 80%;
+}
+
 @keyframes slide {
     0% {
         transform: translatey(-40px);

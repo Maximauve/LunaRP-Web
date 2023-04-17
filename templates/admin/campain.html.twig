@@ -4,7 +4,7 @@
     {% if all_campains is not null %}
         {% if all_campains|length > 0 %}
             <div class="relative overflow-x-auto sm:rounded-lg">
-                <table class="w-full text-sm text-left text-amber-500 dark:text-amber-400">
+                <table class="table-fixed w-full text-sm text-left text-amber-500 dark:text-amber-400">
                     <thead class="text-sm text-amber-700 uppercase bg-sky-50 dark:bg-sky-700 dark:text-amber-400">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-center">Niveau Minimum</th>
@@ -17,9 +17,9 @@
                     <tbody>
                         {% for campain in all_campains %}
                             <tr class="bg-white border-b text-center">
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ campain.character_min_level }}</td>
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ campain.character_max_level }}</td>
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ campain.game_master.username }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ campain.character_min_level }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ campain.character_max_level }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ campain.game_master.username }}</td>
                                 <td class="px-6 py-5"><img  src="{{ asset('images/bouton-modifier.png') }}" /></td>
                                 <td class="px-6 py-5">
                                     <a href="{{ path('admin_delete_campain', {'id': campain.id}) }}">

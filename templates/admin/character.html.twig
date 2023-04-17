@@ -4,7 +4,7 @@
     {% if all_characters is not null %}
         {% if all_characters|length > 0 %}
             <div class="relative overflow-x-auto sm:rounded-lg">
-                <table class="w-full text-sm text-left text-amber-500 dark:text-amber-400">
+                <table class="table-fixed w-full text-sm text-left text-amber-500 dark:text-amber-400">
                     <thead class="text-sm text-amber-700 uppercase bg-sky-50 dark:bg-sky-700 dark:text-amber-400">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-center">Nom</th>
@@ -18,10 +18,10 @@
                     <tbody>
                         {% for character in all_characters %}
                             <tr class="bg-white border-b text-center">
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ character.name }}</td>
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ character.user.username }}</td>
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ character.level }}</td>
-                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white">{{ character.experience }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ character.name }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ character.user.username }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ character.level }}</td>
+                                <td class="px-6 py-5 font-medium text-sky-900 whitespace-nowrap dark:text-white crop">{{ character.experience }}</td>
                                 <td class="px-6 py-5"><img  src="{{ asset('images/bouton-modifier.png') }}" /></td>
                                 <td class="px-6 py-5">
                                     <a href="{{ path('admin_delete_character', {'id': character.id}) }}">
