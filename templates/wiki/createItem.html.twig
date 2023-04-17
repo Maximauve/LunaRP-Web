@@ -1,0 +1,32 @@
+{% extends 'wiki/wiki.html.twig' %}
+
+{% block title %}Créer un Objet{% endblock %}
+
+{% block description %}
+<h1>Création de l'objet</h1>
+<form id="createForm" action='{{path('app_wiki_item_create')}}' method="POST" enctype="multipart/form-data">
+	<label for="name">Nom de l'objet</label>
+	<input type="text" id="name" name="name" value="{{name}}" placeholder="Nom du sort">
+	<label for="price">Prix</label>
+	<input type="number" id="price" name="price" value="{{price}}" placeholder="Prix">
+	<label for="damages">Dégats</label>
+	<input type="number" id="damages" name="damages" value="{{damages}}" placeholder="Dégats">
+	<label for="defense">Défense</label>
+	<input type="text" id="defense" name="defense" value="{{defense}}" placeholder="Défense">
+	<label for="regeneration">Régénération</label>
+	<input type="text" id="regeneration" name="regeneration" value="{{regeneration}}" placeholder="Régénération">
+	<label for="description">Description de la race</label>
+	<div class="group">
+		<textarea class="limit-right" id="description" name="description" value="{{description}}" cols="30" rows="5" spellcheck="true"></textarea>
+		<div id="img-holder" class="img-holder"></div>
+	</div>
+	<input type="file" accept="image/*" id="avatar" name="avatar" onchange="imgUpload(event)"/>
+	<label for="avatar" id="avatar-label">Ajouter une image</label>
+</form>
+<button type="submit" form="createForm">Créer l'objet</button>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('js/inputFile.js') }}"></script>
+{% endblock %}

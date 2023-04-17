@@ -11,17 +11,30 @@
 	<input type="number" id="speed" name="speed" value="{{speed}}" placeholder="Vitesse">
 	<label for="size">Taille</label>
 	<input type="text" id="size" name="size" value="{{size}}" placeholder="Taille">
+	<label for="language">Langues :</label>
+	<select id="language" name="language" onchange="append(this, languagesDrawer, 'languages')">
+		<option value="" disabled selected>Recherche...</option>
+		{% for language in languagesList %}
+			<option value="{{ language.id }}">{{ language.name }}</option>
+		{% endfor %}
+		</select>
+	<ul class="selected-items" id="languagesDrawer">
+		{% for language in languages %}
+			<li id="languages-{{language.id}}">
+				<input type="hidden" name="languages[{{ language.id }}]" value="{{ language.id }}">
+				<p>{{ language.name }}</p>
+				<button type="button" onclick="remove(language,languages-{{language.id}})">✗</button>
+			</li>
+		{% endfor %}
+	</ul>
 	<label for="description">Description de la race</label>
 	<textarea id="description" name="description" value="{{description}}" cols="30" rows="5" spellcheck="true"></textarea>
-	
+
 </form>
-<button type="submit" form="createForm">Créer la classe</button>
+<button type="submit" form="createForm">Créer la race</button>
 {% endblock %}
 
-
-'name' => "",
-'speed' => "",
-'size' => "",
-'description' => "",
-'languages' => [],
-'languagesList' => $languageList,
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('js/wiki.js') }}"></script>
+{% endblock %}

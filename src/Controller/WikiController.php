@@ -256,12 +256,14 @@ class WikiController extends AbstractController
 			return $this->redirectToRoute('app_login');
 		}
 
+		$languages = array_keys($req->request->all('languages'));
+
 		$form = [
 			'name' => $req->request->get('name'),
 			'speed' => $req->request->get('speed'),
 			'size' => $req->request->get('size'),
 			'description' => $req->request->get('description'),
-			'languages' => $req->request->get('languages'),
+			'languages' => $languages,
 		];
 
 		try {
@@ -282,16 +284,24 @@ class WikiController extends AbstractController
 				}
 			}
 
-			$languagesForm = $this->LanguageApi->getAll($req->getSession()->get('user')->getJwt());
+			$languages = [];
+			foreach ($form['languages'] as $language) {
+				$languages[] = $this->LanguageApi->get($req->getSession()->get('user')->getJwt(), $language);
+			}
+
+			$languagesList = $this->LanguageApi->getAll($req->getSession()->get('user')->getJwt());
+			$ids = array_column($languagesList, 'id');
+			array_multisort($ids, SORT_ASC, $languagesList);
 			return $this->render('wiki/createRace.html.twig', [
 				"page" => "race",
 				'name' => $form['name'],
+				'iterable' => $languagesList,
 				'id' => null,
 				'speed' => $form['speed'],
 				'size' => $form['size'],
 				'description' => $form['description'],
-				'languages' => $form['languages'],
-				'languagesList' => $languagesForm,
+				'languages' => $languages,
+				'languagesList' => $languagesList,
 			]);
 		}
 		return $this->redirectToRoute('app_wiki', [
@@ -387,14 +397,14 @@ class WikiController extends AbstractController
 			"iterable" => $iterable,
 			"id" => null,
 			"name" => "",
-			"level" => "",
+			"level" => 0,
 			"scope" => "",
 			"component" => "",
 			"casting_time" => "",
 			"duration" => "",
 			"description" => "",
 			"classes" => [],
-			"ClassesList" => $ClassesList,
+			"classesList" => $ClassesList,
 		]);
 	}
 
@@ -406,6 +416,8 @@ class WikiController extends AbstractController
 			return $this->redirectToRoute('app_login');
 		}
 
+		$classes = array_keys($req->request->all('classes'));
+
 		$form = [
 			"name" => $req->request->get('name'),
 			"level" => $req->request->get('level'),
@@ -414,7 +426,7 @@ class WikiController extends AbstractController
 			"casting_time" => $req->request->get('casting_time'),
 			"duration" => $req->request->get('duration'),
 			"description" => $req->request->get('description'),
-			"classes" => $req->request->get('classes'),
+			"classes" => $classes,
 		];
 
 		try {
@@ -435,6 +447,10 @@ class WikiController extends AbstractController
 				}
 			}
 
+			$classes = [];
+			foreach ($form['classes'] as $class) {
+				$classes[] = $this->ClassApi->get($req->getSession()->get('user')->getJwt(), $class);
+			}
 			$ClassesList = $this->ClassApi->getAll($req->getSession()->get('user')->getJwt());
 
 			$iterable = $this->SpellApi->getAll($req->getSession()->get('user')->getJwt());
@@ -451,8 +467,8 @@ class WikiController extends AbstractController
 				"casting_time" => $form['casting_time'],
 				"duration" => $form['duration'],
 				"description" => $form['description'],
-				"classes" => $form['classes'],
-				"ClassesList" => $ClassesList,
+				"classes" => $classes,
+				"classesList" => $ClassesList,
 			]);
 		}
 		return $this->redirectToRoute('app_wiki', [
@@ -478,10 +494,10 @@ class WikiController extends AbstractController
 			"iterable" => $iterable,
 			"id" => null,
 			"name" => "",
-			"price" => "",
-			"damages" => "",
-			"defense" => "",
-			"regeneration" => "",
+			"price" => 0,
+			"damages" => 0,
+			"defense" => 0,
+			"regeneration" => 0,
 			"description" => "",
 		]);
 	}
@@ -494,7 +510,6 @@ class WikiController extends AbstractController
 			return $this->redirectToRoute('app_login');
 		}
 
-		$file = $req->files->get('file');
 		$form = [
 			"name" => $req->request->get('name'),
 			"price" => $req->request->get('price'),
@@ -502,8 +517,12 @@ class WikiController extends AbstractController
 			"defense" => $req->request->get('defense'),
 			"regeneration" => $req->request->get('regeneration'),
 			"description" => $req->request->get('description'),
-			"file" => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType()),
 		];
+		$file = $req->files->get('avatar');
+		if ($file !== null) {
+			$form['file'] = DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType());
+		}
+
 		$formData = new FormDataPart($form);
 
 		try {

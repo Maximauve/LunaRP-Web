@@ -1,0 +1,46 @@
+{% extends 'wiki/wiki.html.twig' %}
+
+{% block title %}Créer un Sort{% endblock %}
+
+{% block description %}
+<h1>Création de sort</h1>
+<form id="createForm" action='{{path('app_wiki_spell_create')}}' method="POST">
+	<label for="name">Nom du sort</label>
+	<input type="text" id="name" name="name" value="{{name}}" placeholder="Nom du sort">
+	<label for="level">Niveau</label>
+	<input type="number" id="level" name="level" value="{{level}}" placeholder="Niveau">
+	<label for="scope">Portée</label>
+	<input type="number" id="scope" name="scope" value="{{scope}}" placeholder="Portée">
+	<label for="component">Invocation</label>
+	<input type="text" id="component" name="component" value="{{component}}" placeholder="Invocation">
+	<label for="casting_time">Temps d'invocation</label>
+	<input type="text" id="casting_time" name="casting_time" value="{{casting_time}}" placeholder="Temps d'invocation">
+	<label for="duration">Durée</label>
+	<input type="text" id="duration" name="duration" value="{{duration}}" placeholder="Durée">
+	<label for="class">Classes :</label>
+	<select id="class" name="class" onchange="append(this, classDrawer, 'classes')">
+		<option value="" disabled selected>Recherche...</option>
+		{% for class in classesList %}
+			<option value="{{ class.id }}">{{ class.name }}</option>
+		{% endfor %}
+		</select>
+	<ul class="selected-items" id="classDrawer">
+		{% for class in classes %}
+			<li id="classes-{{class.id}}">
+				<input type="hidden" name="classes[{{class.id}}]" value="{{class.id}}">
+				<p>{{ class.name }}</p>
+				<button type="button" onclick="remove(classes-{{class.id}})">✗</button>
+			</li>
+		{% endfor %}
+	</ul>
+	<label for="description">Description de la race</label>
+	<textarea id="description" name="description" value="{{description}}" cols="30" rows="5" spellcheck="true"></textarea>
+
+</form>
+<button type="submit" form="createForm">Créer le sort</button>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent()}}
+	<script src="{{ asset('js/wiki.js') }}"></script>
+{% endblock %}
