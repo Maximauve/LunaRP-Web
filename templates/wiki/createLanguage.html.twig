@@ -1,0 +1,14 @@
+{% extends 'wiki/wiki.html.twig' %}
+
+{% block title %}Créer une Langue{% endblock %}
+
+{% block description %}
+<h1>Création d'une langue</h1>
+<form id="createForm" action='{{path('app_wiki_language_create')}}' method="POST">
+	<label for="name">Nom de la langue</label>
+	<input type="text" id="name" name="name" value="{{name}}" placeholder="Nom de la langue">
+	<label for="description">Description de la langue</label>
+	<textarea id="description" name="description" cols="30" rows="5" value="{{description}}" spellcheck="true"></textarea>
+</form>
+<button type="submit" form="createForm">Créer la langue</button>
+{% endblock %}

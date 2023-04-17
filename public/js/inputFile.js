@@ -1,7 +1,6 @@
 function imgUpload(e) {
 	const image = document.createElement('img');
 	image.src = URL.createObjectURL(e.target.files[0]);
-	image.classList.add('img-preview');
 	const preview = document.getElementById('img-holder');
 
 	const label = document.getElementById('avatar-label');
