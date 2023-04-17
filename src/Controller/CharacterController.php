@@ -228,7 +228,13 @@ class CharacterController extends AbstractController
 		$charisme = $request->request->get('charisme');
 		$file = $request->files->get('avatar');
 		$items = array_keys($request->request->all('item'));
+		if ($items == null) {
+			$items = [];
+		}
 		$spells = array_keys($request->request->all('spell'));
+		if ($spells == null) {
+			$spells = [];
+		}
 		$form = [
 			'name' => $name,
 			'race' => $race,

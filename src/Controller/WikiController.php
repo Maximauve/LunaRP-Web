@@ -235,9 +235,13 @@ class WikiController extends AbstractController
 		$languageList = $this->LanguageApi->getAll($req->getSession()->get('user')->getJwt());
 		$ids = array_column($languageList, 'id');
 		array_multisort($ids, SORT_ASC, $languageList);
+
+		$iterable = $this->RaceApi->getAll($req->getSession()->get('user')->getJwt());
+		$ids = array_column($iterable, 'id');
+		array_multisort($ids, SORT_ASC, $iterable);
 		return $this->render('wiki/createRace.html.twig', [
 			"page" => "race",
-			"iterable" => $languageList,
+			"iterable" => $iterable,
 			'id' => null,
 			'name' => "",
 			'speed' => 0,
@@ -292,10 +296,14 @@ class WikiController extends AbstractController
 			$languagesList = $this->LanguageApi->getAll($req->getSession()->get('user')->getJwt());
 			$ids = array_column($languagesList, 'id');
 			array_multisort($ids, SORT_ASC, $languagesList);
+
+			$iterable = $this->RaceApi->getAll($req->getSession()->get('user')->getJwt());
+			$ids = array_column($iterable, 'id');
+			array_multisort($ids, SORT_ASC, $iterable);
 			return $this->render('wiki/createRace.html.twig', [
 				"page" => "race",
 				'name' => $form['name'],
-				'iterable' => $languagesList,
+				'iterable' => $iterable,
 				'id' => null,
 				'speed' => $form['speed'],
 				'size' => $form['size'],
