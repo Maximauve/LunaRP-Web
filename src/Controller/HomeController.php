@@ -26,7 +26,6 @@ class HomeController extends AbstractController
 		try {
 			$data = $this->characterApiService->getCharacterMe($request->getSession()->get('user')->getJwt());
 			foreach ($data as $i=>$character) {
-				dump($character);
 				if ($character["characterId"] !== null) {
 					$img = $this->localfileApiService->getImage($character["characterId"]);
 					$data[$i]["img"] = $img;
